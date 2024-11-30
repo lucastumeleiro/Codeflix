@@ -1,6 +1,5 @@
 package com.codeflix.admin.catalogo.application.category.create;
 
-import com.codeflix.admin.catalogo.domain.category.Category;
 import com.codeflix.admin.catalogo.domain.category.CategoryGateway;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -35,15 +34,14 @@ public class CreateCategoryuseCaseTest {
         Assertions.assertNotNull(actualOutput.id());
 
         Mockito.verify(categoryGateway, Mockito.times(1))
-                .create(Mockito.argThat(category -> {
-                            return Objects.equals(expectedName, category.getName())
-                                    && Objects.equals(expectedDescription, category.getDescription())
-                                    && Objects.equals(expectedIsActive, category.isActive())
-                                    && Objects.nonNull(category.getId())
-                                    && Objects.nonNull(category.getCreatedAt())
-                                    && Objects.nonNull(category.getUpdatedAt())
-                                    && Objects.isNull(category.getDeletedAt());
-                        }
+                .create(Mockito.argThat(category ->
+                        Objects.equals(expectedName, category.getName())
+                                && Objects.equals(expectedDescription, category.getDescription())
+                                && Objects.equals(expectedIsActive, category.isActive())
+                                && Objects.nonNull(category.getId())
+                                && Objects.nonNull(category.getCreatedAt())
+                                && Objects.nonNull(category.getUpdatedAt())
+                                && Objects.isNull(category.getDeletedAt())
                 ));
     }
 
