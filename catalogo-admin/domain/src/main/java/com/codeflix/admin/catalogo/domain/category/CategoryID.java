@@ -18,12 +18,12 @@ public class CategoryID extends Identifier {
         return CategoryID.from(UUID.randomUUID());
     }
 
-    public static CategoryID from(final String anId) {
-        return new CategoryID(anId);
+    public static CategoryID from(final String id) {
+        return new CategoryID(id);
     }
 
-    public static CategoryID from(final UUID anId) {
-        return new CategoryID(anId.toString().toLowerCase());
+    public static CategoryID from(final UUID id) {
+        return new CategoryID(id.toString().toLowerCase());
     }
 
     public String getValue() {

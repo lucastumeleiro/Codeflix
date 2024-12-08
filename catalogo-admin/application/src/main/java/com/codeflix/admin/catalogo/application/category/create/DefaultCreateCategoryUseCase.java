@@ -12,14 +12,14 @@ public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
 
     private final CategoryGateway categoryGateway;
 
+    public DefaultCreateCategoryUseCase(CategoryGateway categoryGateway) {
+        this.categoryGateway = Objects.requireNonNull(categoryGateway);
+    }
+
     private Either<Notification, CreateCategoryOutput> create(Category category) {
         return API.Try(() -> this.categoryGateway.create(category))
                 .toEither()
                 .bimap(Notification::create, CreateCategoryOutput::from);
-    }
-
-    public DefaultCreateCategoryUseCase(CategoryGateway categoryGateway) {
-        this.categoryGateway = Objects.requireNonNull(categoryGateway);
     }
 
     @Override
