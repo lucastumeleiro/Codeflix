@@ -153,7 +153,7 @@ public class CategoryTest {
     }
 
     @Test
-    public void givenValidActiveCategory_whenCallDeactivate_thenReturnCategoryInactivated() {
+    public void givenValidActiveCategory_whenCallDeactivate_thenReturnCategoryInactivated() throws Exception {
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = false;
@@ -168,6 +168,8 @@ public class CategoryTest {
 
         Assertions.assertTrue(category.isActive());
         Assertions.assertNull(category.getDeletedAt());
+
+        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
 
         final var actualCategory = category.deactivate();
 
@@ -213,7 +215,7 @@ public class CategoryTest {
     }
 
     @Test
-    public void givenValidCategory_whenCallUpdate_thenReturnCategoryUpdated() {
+    public void givenValidCategory_whenCallUpdate_thenReturnCategoryUpdated() throws Exception {
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = true;
@@ -225,6 +227,8 @@ public class CategoryTest {
 
         final var createdAt = category.getCreatedAt();
         final var updatedAt = category.getUpdatedAt();
+
+        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
 
         final var actualCategory = category.update(expectedName, expectedDescription, expectedIsActive);
 
@@ -240,7 +244,7 @@ public class CategoryTest {
     }
 
     @Test
-    public void givenValidCategory_whenCallUpdateToInactive_thenReturnCategoryUpdated() {
+    public void givenValidCategory_whenCallUpdateToInactive_thenReturnCategoryUpdated() throws Exception {
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = false;
@@ -254,6 +258,8 @@ public class CategoryTest {
 
         final var createdAt = category.getCreatedAt();
         final var updatedAt = category.getUpdatedAt();
+
+        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
 
         final var actualCategory = category.update(expectedName, expectedDescription, expectedIsActive);
 
@@ -269,7 +275,7 @@ public class CategoryTest {
     }
 
     @Test
-    public void givenValidCategory_whenCallUpdateWithInvalidParams_thenReturnCategoryUpdated() {
+    public void givenValidCategory_whenCallUpdateWithInvalidParams_thenReturnCategoryUpdated() throws Exception {
         final String expectedName = null;
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = true;
@@ -281,6 +287,8 @@ public class CategoryTest {
 
         final var createdAt = category.getCreatedAt();
         final var updatedAt = category.getUpdatedAt();
+
+        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
 
         final var actualCategory = category.update(expectedName, expectedDescription, expectedIsActive);
 

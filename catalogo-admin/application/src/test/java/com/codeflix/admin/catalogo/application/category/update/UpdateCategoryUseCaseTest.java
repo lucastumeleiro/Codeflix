@@ -33,7 +33,7 @@ public class UpdateCategoryUseCaseTest {
     }
 
     @Test
-    public void givenValidCommand_whenCallsUpdateCategory_thenShouldReturnCategoryId() {
+    public void givenValidCommand_whenCallsUpdateCategory_thenShouldReturnCategoryId() throws Exception {
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = true;
@@ -49,10 +49,12 @@ public class UpdateCategoryUseCaseTest {
         );
 
         Mockito.when(gateway.findById(Mockito.eq(expectedId)))
-                .thenReturn(Optional.of(Category.clone(category)));
+                .thenReturn(Optional.of(Category.with(category)));
 
         Mockito.when(gateway.update(Mockito.any()))
                 .thenAnswer(returnsFirstArg());
+
+        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
 
         final var actualOutput = useCase.execute(command).get();
 
@@ -84,7 +86,7 @@ public class UpdateCategoryUseCaseTest {
         final var command = UpdateCategoryCommand.with(expectedId.getValue(), expectedName, expectedDescription, expectedIsActive);
 
         Mockito.when(gateway.findById(Mockito.eq(expectedId)))
-                .thenReturn(Optional.of(Category.clone(category)));
+                .thenReturn(Optional.of(Category.with(category)));
 
         Mockito.when(gateway.update(Mockito.any()))
                 .thenAnswer(returnsFirstArg());
@@ -131,7 +133,7 @@ public class UpdateCategoryUseCaseTest {
         );
 
         Mockito.when(gateway.findById(Mockito.eq(expectedId)))
-                .thenReturn(Optional.of(Category.clone(category)));
+                .thenReturn(Optional.of(Category.with(category)));
 
         final var notification = useCase.execute(command).getLeft();
 
@@ -142,15 +144,16 @@ public class UpdateCategoryUseCaseTest {
     }
 
     @Test
-    public void givenValidCommand_whenGatewayThrowsRandomException_thenShouldReturnException() {
+    public void givenValidCommand_whenGatewayThrowsRandomException_thenShouldReturnException() throws Exception {
+        final var category = Category.newCategory("Film", null, true);
+        final var expectedId = category.getId();
+
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = true;
-        final var expectedErrorMessage = "Gateway error";
         final var expectedErrorCount = 1;
+        final var expectedErrorMessage = "Gateway error";
 
-        final var category = Category.newCategory("Film", null, true);
-        final var expectedId = category.getId();
 
         final var command = UpdateCategoryCommand.with(
                 expectedId.getValue(),
@@ -160,7 +163,9 @@ public class UpdateCategoryUseCaseTest {
         );
 
         Mockito.when(gateway.findById(Mockito.eq(expectedId)))
-                .thenReturn(Optional.of(Category.clone(category)));
+                .thenReturn(Optional.of(Category.with(category)));
+
+        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
 
         Mockito.when(gateway.update(Mockito.any()))
                 .thenThrow(new IllegalStateException(expectedErrorMessage));

@@ -9,6 +9,7 @@ import com.codeflix.admin.catalogo.domain.validation.handler.Notification;
 import io.vavr.API;
 import io.vavr.control.Either;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class DefaultUpdateCategoryUseCase extends UpdateCategoryUseCase {
@@ -16,7 +17,7 @@ public class DefaultUpdateCategoryUseCase extends UpdateCategoryUseCase {
     private final CategoryGateway gateway;
 
     public DefaultUpdateCategoryUseCase(CategoryGateway gateway) {
-        this.gateway = gateway;
+        this.gateway = Objects.requireNonNull(gateway);
     }
 
     private static Supplier<DomainException> notFound(CategoryID id) {

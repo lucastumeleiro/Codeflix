@@ -10,14 +10,14 @@ import java.util.Objects;
 
 public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
 
-    private final CategoryGateway categoryGateway;
+    private final CategoryGateway gateway;
 
-    public DefaultCreateCategoryUseCase(CategoryGateway categoryGateway) {
-        this.categoryGateway = Objects.requireNonNull(categoryGateway);
+    public DefaultCreateCategoryUseCase(CategoryGateway gateway) {
+        this.gateway = Objects.requireNonNull(gateway);
     }
 
     private Either<Notification, CreateCategoryOutput> create(Category category) {
-        return API.Try(() -> this.categoryGateway.create(category))
+        return API.Try(() -> this.gateway.create(category))
                 .toEither()
                 .bimap(Notification::create, CreateCategoryOutput::from);
     }
