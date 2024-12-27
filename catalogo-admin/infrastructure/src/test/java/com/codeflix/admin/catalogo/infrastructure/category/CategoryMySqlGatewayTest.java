@@ -1,6 +1,7 @@
 package com.codeflix.admin.catalogo.infrastructure.category;
 
 import com.codeflix.admin.catalogo.domain.category.Category;
+import com.codeflix.admin.catalogo.domain.category.CategoryID;
 import com.codeflix.admin.catalogo.infrastructure.MySqlGatewayTest;
 import com.codeflix.admin.catalogo.infrastructure.category.persistence.CategoryJpaEntity;
 import com.codeflix.admin.catalogo.infrastructure.category.persistence.CategoryRepository;
@@ -78,4 +79,26 @@ public class CategoryMySqlGatewayTest {
         Assertions.assertTrue(category.getUpdatedAt().isBefore(actualCategory.getUpdatedAt()));
         Assertions.assertNull(actualEntity.getDeletedAt());
     }
+
+    @Test
+    public void givenPrePersistedCategoryAndValidCategoryId_whenTryToDeletedIt_shouldDeleteCategory() {
+        final var category = Category.newCategory("Filmes", null, true);
+        Assertions.assertEquals(0, repository.count());
+
+        repository.saveAndFlush(CategoryJpaEntity.from(category));
+        Assertions.assertEquals(1, repository.count());
+
+        gateway.deleteById(category.getId());
+        Assertions.assertEquals(0, repository.count());
+    }
+
+    @Test
+    public void givenInvalidCategoryId_whenTryToDeletedIt_shouldNothing() {
+        Assertions.assertEquals(0, repository.count());
+
+        gateway.deleteById(CategoryID.from("Invalid"));
+
+        Assertions.assertEquals(0, repository.count());
+    }
+
 }
