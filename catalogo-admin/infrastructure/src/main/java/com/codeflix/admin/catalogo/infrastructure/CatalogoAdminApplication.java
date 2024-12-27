@@ -12,5 +12,4 @@ public class CatalogoAdminApplication {
         SpringApplication.run(WebServerConfig.class, args);
     }
 
-
 }
