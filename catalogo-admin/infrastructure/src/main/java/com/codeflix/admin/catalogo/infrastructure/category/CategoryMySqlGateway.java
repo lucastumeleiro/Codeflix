@@ -7,8 +7,14 @@ import com.codeflix.admin.catalogo.domain.category.CategorySearchQuery;
 import com.codeflix.admin.catalogo.domain.pagination.Pagination;
 import com.codeflix.admin.catalogo.infrastructure.category.persistence.CategoryJpaEntity;
 import com.codeflix.admin.catalogo.infrastructure.category.persistence.CategoryRepository;
+import com.codeflix.admin.catalogo.infrastructure.utils.SpecificationUtils;
+import jakarta.persistence.criteria.*;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -44,8 +50,31 @@ public class CategoryMySqlGateway implements CategoryGateway {
     }
 
     @Override
-    public Pagination<Category> findAll(CategorySearchQuery query) {
-        return null;
+    public Pagination<Category> findAll(final CategorySearchQuery query) {
+
+        final var specifications = Optional.ofNullable(query.terms())
+                .filter(term -> !term.isBlank())
+                .map(term -> {
+                    final Specification<CategoryJpaEntity> nameLike = SpecificationUtils.like("name", term);
+                    final Specification<CategoryJpaEntity> descriptionLike = SpecificationUtils.like("description", term);
+                    return nameLike.or(descriptionLike);
+                })
+                .orElse(null);
+
+        final var page = PageRequest.of(
+                query.page(),
+                query.perPage(),
+                Sort.by(Sort.Direction.fromString(query.direction()), query.sort())
+        );
+
+        final var pageResult = this.repository.findAll(Specification.where(specifications), page);
+
+        return new Pagination<>(
+                pageResult.getNumber(),
+                pageResult.getSize(),
+                pageResult.getTotalElements(),
+                pageResult.map(CategoryJpaEntity::toAggregate).toList()
+        );
     }
 
     private Category save(Category category) {
