@@ -40,10 +40,8 @@ public class CategoryAPITest {
 
     @MockitoBean
     private CreateCategoryUseCase createCategoryUseCase;
-
     @MockitoBean
     private GetCategoryUseCase getCategoryUseCase;
-
     @MockitoBean
     private UpdateCategoryUseCase updateCategoryUseCase;
 
@@ -200,7 +198,7 @@ public class CategoryAPITest {
     }
 
     @Test
-    public void givenAValidCommand_whenCallsUpdateCategory_shouldReturnCategoryId() throws Exception {
+    public void givenValidCommand_whenCallsUpdateCategory_shouldReturnCategoryId() throws Exception {
         final var expectedId = "123";
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assistida";
@@ -231,7 +229,7 @@ public class CategoryAPITest {
     }
 
     @Test
-    public void givenAInvalidName_whenCallsUpdateCategory_thenShouldReturnDomainException() throws Exception {
+    public void givenInvalidName_whenCallsUpdateCategory_thenShouldReturnDomainException() throws Exception {
         final var expectedId = "123";
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assistida";
@@ -266,7 +264,7 @@ public class CategoryAPITest {
     }
 
     @Test
-    public void givenACommandWithInvalidID_whenCallsUpdateCategory_shouldReturnNotFoundException() throws Exception {
+    public void givenCommandWithInvalidID_whenCallsUpdateCategory_shouldReturnNotFoundException() throws Exception {
         final var expectedId = "not-found";
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assistida";
