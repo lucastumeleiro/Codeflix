@@ -16,7 +16,6 @@ plugins {
 }
 
 group = 'com.codeflix.admin.catalogo.infrastructure'
-version = '1.0-SNAPSHOT'
 
 bootJar {
     archiveFileName = 'application.jar'
@@ -33,6 +32,8 @@ dependencies {
 
     implementation 'io.vavr:vavr:0.10.5'
     implementation('com.mysql:mysql-connector-j')
+
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
 
     implementation('org.springframework.boot:spring-boot-starter-web') {
         exclude module: 'spring-boot-starter-tomcat'
