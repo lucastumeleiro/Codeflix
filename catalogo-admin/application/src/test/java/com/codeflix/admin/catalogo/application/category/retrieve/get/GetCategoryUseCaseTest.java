@@ -3,7 +3,7 @@ package com.codeflix.admin.catalogo.application.category.retrieve.get;
 import com.codeflix.admin.catalogo.domain.category.Category;
 import com.codeflix.admin.catalogo.domain.category.CategoryGateway;
 import com.codeflix.admin.catalogo.domain.category.CategoryID;
-import com.codeflix.admin.catalogo.domain.exceptions.DomainException;
+import com.codeflix.admin.catalogo.domain.exceptions.NotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-public class GetCategoryByIdUseCaseTest {
+public class GetCategoryUseCaseTest {
 
     @InjectMocks
     private DefaultGetCategoryUseCase useCase;
@@ -52,7 +52,7 @@ public class GetCategoryByIdUseCaseTest {
                 .thenReturn(Optional.empty());
 
         final var actualException = Assertions.assertThrows(
-                DomainException.class,
+                NotFoundException.class,
                 () -> useCase.execute(expectedId.getValue())
         );
 
