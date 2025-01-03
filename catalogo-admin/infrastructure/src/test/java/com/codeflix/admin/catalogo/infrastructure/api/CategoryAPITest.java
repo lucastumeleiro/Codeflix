@@ -17,8 +17,8 @@ import com.codeflix.admin.catalogo.domain.exceptions.NotFoundException;
 import com.codeflix.admin.catalogo.domain.pagination.Pagination;
 import com.codeflix.admin.catalogo.domain.validation.Error;
 import com.codeflix.admin.catalogo.domain.validation.handler.Notification;
-import com.codeflix.admin.catalogo.infrastructure.category.models.CreateCategoryApiInput;
-import com.codeflix.admin.catalogo.infrastructure.category.models.UpdateCategoryApiInput;
+import com.codeflix.admin.catalogo.infrastructure.category.models.CreateCategoryRequest;
+import com.codeflix.admin.catalogo.infrastructure.category.models.UpdateCategoryRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vavr.API;
 import org.hamcrest.Matchers;
@@ -61,7 +61,7 @@ public class CategoryAPITest {
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = true;
 
-        final var input = new CreateCategoryApiInput(expectedName, expectedDescription, expectedIsActive);
+        final var input = new CreateCategoryRequest(expectedName, expectedDescription, expectedIsActive);
 
         Mockito.when(createCategoryUseCase.execute(Mockito.any()))
                 .thenReturn(API.Right(CreateCategoryOutput.from("123")));
@@ -94,7 +94,7 @@ public class CategoryAPITest {
         final var expectedIsActive = true;
         final var expectedMessage = "'name' should not be null";
 
-        final var input = new CreateCategoryApiInput(expectedName, expectedDescription, expectedIsActive);
+        final var input = new CreateCategoryRequest(expectedName, expectedDescription, expectedIsActive);
 
         Mockito.when(createCategoryUseCase.execute(Mockito.any()))
                 .thenReturn(API.Left(Notification.create(new Error(expectedMessage))));
@@ -127,7 +127,7 @@ public class CategoryAPITest {
         final var expectedMessage = "'name' should not be null";
 
         final var input =
-                new CreateCategoryApiInput(expectedName, expectedDescription, expectedIsActive);
+                new CreateCategoryRequest(expectedName, expectedDescription, expectedIsActive);
 
         Mockito.when(createCategoryUseCase.execute(Mockito.any()))
                 .thenThrow(DomainException.with(new Error(expectedMessage)));
@@ -216,7 +216,7 @@ public class CategoryAPITest {
         Mockito.when(updateCategoryUseCase.execute(Mockito.any()))
                 .thenReturn(API.Right(UpdateCategoryOutput.from(expectedId)));
 
-        final var command = new UpdateCategoryApiInput(expectedName, expectedDescription, expectedIsActive);
+        final var command = new UpdateCategoryRequest(expectedName, expectedDescription, expectedIsActive);
 
         final var request = MockMvcRequestBuilders.put("/categories/{id}", expectedId)
                 .accept(MediaType.APPLICATION_JSON)
@@ -250,7 +250,7 @@ public class CategoryAPITest {
         Mockito.when(updateCategoryUseCase.execute(Mockito.any()))
                 .thenReturn(API.Left(Notification.create(new Error(expectedMessage))));
 
-        final var command = new UpdateCategoryApiInput(expectedName, expectedDescription, expectedIsActive);
+        final var command = new UpdateCategoryRequest(expectedName, expectedDescription, expectedIsActive);
 
         final var request = MockMvcRequestBuilders.put("/categories/{id}", expectedId)
                 .accept(MediaType.APPLICATION_JSON)
@@ -284,7 +284,7 @@ public class CategoryAPITest {
         Mockito.when(updateCategoryUseCase.execute(Mockito.any()))
                 .thenThrow(NotFoundException.with(Category.class, CategoryID.from(expectedId)));
 
-        final var command = new UpdateCategoryApiInput(expectedName, expectedDescription, expectedIsActive);
+        final var command = new UpdateCategoryRequest(expectedName, expectedDescription, expectedIsActive);
 
         final var request = MockMvcRequestBuilders.put("/categories/{id}", expectedId)
                 .accept(MediaType.APPLICATION_JSON)

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-public record CreateCategoryApiInput(
+public record CreateCategoryRequest(
         @JsonProperty("name") String name,
         @JsonProperty("description") String description,
         @JsonProperty("is_active") Boolean active
