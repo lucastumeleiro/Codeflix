@@ -8,4 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface CategoryRepository extends JpaRepository<CategoryJpaEntity, String> {
 
     Page<CategoryJpaEntity> findAll(Specification<CategoryJpaEntity> clause, Pageable page);
+
+//    @Query(value = "select c.id from Category c where c.id in :ids")
+//    List<String> existsByIds(@Param("ids") List<String> ids);
 }

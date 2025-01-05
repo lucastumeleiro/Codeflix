@@ -3,8 +3,8 @@ package com.codeflix.admin.catalogo.infrastructure.category;
 import com.codeflix.admin.catalogo.domain.category.Category;
 import com.codeflix.admin.catalogo.domain.category.CategoryGateway;
 import com.codeflix.admin.catalogo.domain.category.CategoryID;
-import com.codeflix.admin.catalogo.domain.pagination.SearchQuery;
 import com.codeflix.admin.catalogo.domain.pagination.Pagination;
+import com.codeflix.admin.catalogo.domain.pagination.SearchQuery;
 import com.codeflix.admin.catalogo.infrastructure.category.persistence.CategoryJpaEntity;
 import com.codeflix.admin.catalogo.infrastructure.category.persistence.CategoryRepository;
 import com.codeflix.admin.catalogo.infrastructure.utils.SpecificationUtils;
@@ -13,6 +13,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,6 +34,19 @@ public class CategoryMySqlGateway implements CategoryGateway {
     @Override
     public Category update(final Category category) {
         return save(category);
+    }
+
+    @Override
+    public List<CategoryID> existsByIds(final Iterable<CategoryID> categoryIDs) {
+        return Collections.emptyList();
+
+        //        final var ids = StreamSupport.stream(categoryIDs.spliterator(), false)
+//                .map(CategoryID::getValue)
+//                .toList();
+//
+//        return this.repository.existsByIds(ids).stream()
+//                .map(CategoryID::from)
+//                .toList();
     }
 
     @Override
