@@ -34,7 +34,7 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
     }
 
     @Test
-    public void givenValidCommand_whenCallsUpdateGenre_shouldReturnGenreId() {
+    public void givenValidCommand_whenCallsUpdateGenre_shouldReturnGenreId() throws Exception {
         final var genre = Genre.newGenre("acao", true);
 
         final var expectedId = genre.getId();
@@ -55,6 +55,8 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
         Mockito.when(genreGateway.update(Mockito.any()))
                 .thenAnswer(AdditionalAnswers.returnsFirstArg());
         final var actualOutput = useCase.execute(command);
+
+        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
 
         Assertions.assertNotNull(actualOutput);
         Assertions.assertEquals(expectedId.getValue(), actualOutput.id());

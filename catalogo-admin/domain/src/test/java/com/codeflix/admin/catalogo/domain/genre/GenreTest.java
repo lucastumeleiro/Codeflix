@@ -218,7 +218,7 @@ public class GenreTest {
     }
 
     @Test
-    public void givenValidGenre_whenCallUpdateWithNullCategories_shouldReceiveOK() {
+    public void givenValidGenre_whenCallUpdateWithNullCategories_shouldReceiveOK() throws Exception {
         final var expectedName = "Ação";
         final var expectedIsActive = true;
         final var expectedCategories = new ArrayList<CategoryID>();
@@ -227,6 +227,8 @@ public class GenreTest {
 
         final var actualCreatedAt = actualGenre.getCreatedAt();
         final var actualUpdatedAt = actualGenre.getUpdatedAt();
+
+        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
 
         Assertions.assertDoesNotThrow(() -> {
             actualGenre.update(expectedName, expectedIsActive, null);
