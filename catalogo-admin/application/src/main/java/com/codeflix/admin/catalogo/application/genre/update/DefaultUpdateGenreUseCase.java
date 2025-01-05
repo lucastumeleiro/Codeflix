@@ -39,12 +39,12 @@ public class DefaultUpdateGenreUseCase extends UpdateGenreUseCase {
         final var isActive = command.isActive();
         final var categories = toCategoryId(command.categories());
 
-        final var aGenre = this.genreGateway.findById(id)
+        final var genre = this.genreGateway.findById(id)
                 .orElseThrow(notFound(id));
 
         final var notification = Notification.create();
         notification.append(validateCategories(categories));
-        notification.validate(() -> aGenre.update(name, isActive, categories));
+        notification.validate(() -> genre.update(name, isActive, categories));
 
         if (notification.hasError()) {
             throw new NotificationException(
@@ -52,7 +52,7 @@ public class DefaultUpdateGenreUseCase extends UpdateGenreUseCase {
             );
         }
 
-        return UpdateGenreOutput.from(this.genreGateway.update(aGenre));
+        return UpdateGenreOutput.from(this.genreGateway.update(genre));
     }
 
     private ValidationHandler validateCategories(List<CategoryID> ids) {

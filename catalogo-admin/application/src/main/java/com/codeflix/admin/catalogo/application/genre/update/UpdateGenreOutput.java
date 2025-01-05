@@ -4,7 +4,7 @@ import com.codeflix.admin.catalogo.domain.genre.Genre;
 
 public record UpdateGenreOutput(String id) {
 
-    public static UpdateGenreOutput from(final Genre aGenre) {
-        return new UpdateGenreOutput(aGenre.getId().getValue());
+    public static UpdateGenreOutput from(final Genre genre) {
+        return new UpdateGenreOutput(genre.getId().getValue());
     }
 }

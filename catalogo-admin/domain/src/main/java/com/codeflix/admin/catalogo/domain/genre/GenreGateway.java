@@ -8,15 +8,15 @@ import java.util.Optional;
 
 public interface GenreGateway {
 
-    Genre create(Genre aGenre);
+    Genre create(Genre genre);
 
-    void deleteById(GenreID anId);
+    void deleteById(GenreID id);
 
-    Optional<Genre> findById(GenreID anId);
+    Optional<Genre> findById(GenreID id);
 
-    Genre update(Genre aGenre);
+    Genre update(Genre genre);
 
-    Pagination<Genre> findAll(SearchQuery aQuery);
+    Pagination<Genre> findAll(SearchQuery query);
 
     List<GenreID> existsByIds(Iterable<GenreID> ids);
 }

@@ -73,7 +73,7 @@ public class UpdateCategoryUseCaseTest extends UseCaseTest {
     }
 
     @Test
-    public void givenValidCommandWithInactiveCategory_whenCallsUpdateCategory_thenShouldReturnInactiveCategoryId() {
+    public void givenValidCommandWithInactiveCategory_whenCallsUpdateCategory_thenShouldReturnInactiveCategoryId() throws Exception {
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = false;
@@ -93,6 +93,8 @@ public class UpdateCategoryUseCaseTest extends UseCaseTest {
         Assertions.assertNull(category.getDeletedAt());
 
         final var actualOutput = useCase.execute(command).get();
+
+        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
 
         Assertions.assertNotNull(actualOutput);
         Assertions.assertNotNull(actualOutput.id());
