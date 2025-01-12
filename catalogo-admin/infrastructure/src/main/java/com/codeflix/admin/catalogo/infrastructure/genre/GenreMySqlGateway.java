@@ -17,16 +17,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 import static org.springframework.data.jpa.domain.Specification.where;
 
 @Component
 public class GenreMySqlGateway implements GenreGateway {
 
-    private final GenreRepository genreRepository;
+    private final GenreRepository repository;
 
-    public GenreMySqlGateway(final GenreRepository genreRepository) {
-        this.genreRepository = Objects.requireNonNull(genreRepository);
+    public GenreMySqlGateway(final GenreRepository repository) {
+        this.repository = Objects.requireNonNull(repository);
     }
 
     @Override
@@ -37,14 +38,14 @@ public class GenreMySqlGateway implements GenreGateway {
     @Override
     public void deleteById(final GenreID id) {
         final var genreId = id.getValue();
-        if (this.genreRepository.existsById(genreId)) {
-            this.genreRepository.deleteById(genreId);
+        if (this.repository.existsById(genreId)) {
+            this.repository.deleteById(genreId);
         }
     }
 
     @Override
     public Optional<Genre> findById(final GenreID id) {
-        return this.genreRepository.findById(id.getValue())
+        return this.repository.findById(id.getValue())
                 .map(GenreJpaEntity::toAggregate);
     }
 
@@ -67,7 +68,7 @@ public class GenreMySqlGateway implements GenreGateway {
                 .orElse(null);
 
         final var pageResult =
-                this.genreRepository.findAll(where(where), page);
+                this.repository.findAll(where(where), page);
 
         return new Pagination<>(
                 pageResult.getNumber(),
@@ -79,18 +80,17 @@ public class GenreMySqlGateway implements GenreGateway {
 
     @Override
     public List<GenreID> existsByIds(final Iterable<GenreID> genreIDS) {
-        return Collections.emptyList();
+        final var ids = StreamSupport.stream(genreIDS.spliterator(), false)
+                .map(GenreID::getValue)
+                .toList();
 
-        //        final var ids = StreamSupport.stream(genreIDS.spliterator(), false)
-//                .map(GenreID::getValue)
-//                .toList();
-//        return this.genreRepository.existsByIds(ids).stream()
-//                .map(GenreID::from)
-//                .toList();
+        return this.repository.existsByIds(ids).stream()
+                .map(GenreID::from)
+                .toList();
     }
 
     private Genre save(final Genre genre) {
-        return this.genreRepository.save(GenreJpaEntity.from(genre))
+        return this.repository.save(GenreJpaEntity.from(genre))
                 .toAggregate();
     }
 

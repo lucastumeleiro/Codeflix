@@ -1,5 +1,6 @@
 package com.codeflix.admin.catalogo;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,11 +13,16 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @ActiveProfiles("test-integration")
+@ComponentScan(
+        basePackages = "com.codeflix.admin.catalogo",
+        useDefaultFilters = false,
+        includeFilters = {
+                @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".*MySqlGateway")
+        }
+)
 @DataJpaTest
-@ComponentScan(includeFilters = {
-        @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".[MySqlGateway]")
-})
-@ExtendWith(CleanUpExtension.class)
+@ExtendWith(MySqlCleanUpExtension.class)
+@Tag("integrationTest")
 public @interface MySqlGatewayTest {
 
 }

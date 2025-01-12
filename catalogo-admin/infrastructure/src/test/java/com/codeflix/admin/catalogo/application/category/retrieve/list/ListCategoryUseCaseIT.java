@@ -42,7 +42,7 @@ public class ListCategoryUseCaseIT {
             category.setCreatedAt(InstantUtils.now());
             repository.saveAndFlush(category);
             try {
-                Thread.sleep(100);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
