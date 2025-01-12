@@ -14,6 +14,8 @@ import com.codeflix.admin.catalogo.domain.category.CategoryGateway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Objects;
+
 @Configuration
 public class CategoryUseCaseConfig {
 
@@ -22,7 +24,7 @@ public class CategoryUseCaseConfig {
     public CategoryUseCaseConfig(
             final CategoryGateway gateway
     ) {
-        this.gateway = gateway;
+        this.gateway = Objects.requireNonNull(gateway);
     }
 
     @Bean

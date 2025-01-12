@@ -11,19 +11,20 @@ import com.codeflix.admin.catalogo.infrastructure.utils.SpecificationUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
-@Service
+@Component
 public class CategoryMySqlGateway implements CategoryGateway {
 
     private final CategoryRepository repository;
 
     public CategoryMySqlGateway(final CategoryRepository repository) {
-        this.repository = repository;
+        this.repository = Objects.requireNonNull(repository);
     }
 
     @Override
@@ -38,15 +39,14 @@ public class CategoryMySqlGateway implements CategoryGateway {
 
     @Override
     public List<CategoryID> existsByIds(final Iterable<CategoryID> categoryIDs) {
-        return Collections.emptyList();
 
-        //        final var ids = StreamSupport.stream(categoryIDs.spliterator(), false)
-//                .map(CategoryID::getValue)
-//                .toList();
-//
-//        return this.repository.existsByIds(ids).stream()
-//                .map(CategoryID::from)
-//                .toList();
+        final var ids = StreamSupport.stream(categoryIDs.spliterator(), false)
+                .map(CategoryID::getValue)
+                .toList();
+
+        return this.repository.existsByIds(ids).stream()
+                .map(CategoryID::from)
+                .toList();
     }
 
     @Override
@@ -67,11 +67,7 @@ public class CategoryMySqlGateway implements CategoryGateway {
 
         final var specifications = Optional.ofNullable(query.terms())
                 .filter(term -> !term.isBlank())
-                .map(term -> {
-                    final Specification<CategoryJpaEntity> nameLike = SpecificationUtils.like("name", term);
-                    final Specification<CategoryJpaEntity> descriptionLike = SpecificationUtils.like("description", term);
-                    return nameLike.or(descriptionLike);
-                })
+                .map(this::AssembleSpecification)
                 .orElse(null);
 
         final var page = PageRequest.of(
@@ -92,5 +88,12 @@ public class CategoryMySqlGateway implements CategoryGateway {
 
     private Category save(Category category) {
         return this.repository.save(CategoryJpaEntity.from(category)).toAggregate();
+    }
+
+    private Specification<CategoryJpaEntity> AssembleSpecification(final String term) {
+        final Specification<CategoryJpaEntity> nameLike = SpecificationUtils.like("name", term);
+        final Specification<CategoryJpaEntity> descriptionLike = SpecificationUtils.like("description", term);
+
+        return nameLike.or(descriptionLike);
     }
 }
