@@ -61,7 +61,7 @@ public class ListGenreUseCaseIT{
     }
 
     @Test
-    public void givenAValidQuery_whenCallsListGenreAndResultIsEmpty_shouldReturnGenres() {
+    public void givenValidQuery_whenCallsListGenreAndResultIsEmpty_shouldReturnGenres() {
         final var genres = List.<Genre>of();
 
         final var expectedPage = 0;

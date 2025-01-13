@@ -399,7 +399,7 @@ public class GenreMySqlGatewayTest {
             "cien,0,10,1,1,Ficção científica",
             "terr,0,10,1,1,Terror",
     })
-    public void givenAValidTerm_whenCallsFindAll_shouldReturnFiltered(
+    public void givenValidTerm_whenCallsFindAll_shouldReturnFiltered(
             final String expectedTerms,
             final int expectedPage,
             final int expectedPerPage,
@@ -430,7 +430,7 @@ public class GenreMySqlGatewayTest {
             "createdAt,asc,0,10,5,5,Comédia romântica",
             "createdAt,desc,0,10,5,5,Ficção científica",
     })
-    public void givenAValidSortAndDirection_whenCallsFindAll_shouldReturnOrdered(
+    public void givenValidSortAndDirection_whenCallsFindAll_shouldReturnOrdered(
             final String expectedSort,
             final String expectedDirection,
             final int expectedPage,
@@ -460,7 +460,7 @@ public class GenreMySqlGatewayTest {
             "1,2,2,5,Drama;Ficção científica",
             "2,2,1,5,Terror",
     })
-    public void givenAValidPaging_whenCallsFindAll_shouldReturnPaged(
+    public void givenValidPaging_whenCallsFindAll_shouldReturnPaged(
             final int expectedPage,
             final int expectedPerPage,
             final int expectedItemsCount,

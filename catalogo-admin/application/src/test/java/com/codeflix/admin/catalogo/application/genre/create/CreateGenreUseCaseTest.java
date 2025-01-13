@@ -60,7 +60,7 @@ public class CreateGenreUseCaseTest extends UseCaseTest {
     }
 
     @Test
-    public void givenAValidCommandWithCategories_whenCallsCreateGenre_shouldReturnGenreId() {
+    public void givenValidCommandWithCategories_whenCallsCreateGenre_shouldReturnGenreId() {
         final var expectName = "Ação";
         final var expectedIsActive = true;
         final var expectedCategories = List.of(
@@ -96,7 +96,7 @@ public class CreateGenreUseCaseTest extends UseCaseTest {
     }
 
     @Test
-    public void givenAValidCommandWithInactiveGenre_whenCallsCreateGenre_shouldReturnGenreId() {
+    public void givenValidCommandWithInactiveGenre_whenCallsCreateGenre_shouldReturnGenreId() {
         final var expectName = "Ação";
         final var expectedIsActive = false;
         final var expectedCategories = List.<CategoryID>of();
@@ -124,7 +124,7 @@ public class CreateGenreUseCaseTest extends UseCaseTest {
     }
 
     @Test
-    public void givenAInvalidEmptyName_whenCallsCreateGenre_shouldReturnDomainException() {
+    public void givenInvalidEmptyName_whenCallsCreateGenre_shouldReturnDomainException() {
         final var expectName = " ";
         final var expectedIsActive = true;
         final var expectedCategories = List.<CategoryID>of();
@@ -146,7 +146,7 @@ public class CreateGenreUseCaseTest extends UseCaseTest {
     }
 
     @Test
-    public void givenAInvalidNullName_whenCallsCreateGenre_shouldReturnDomainException() {
+    public void givenInvalidNullName_whenCallsCreateGenre_shouldReturnDomainException() {
         final String expectName = null;
         final var expectedIsActive = true;
         final var expectedCategories = List.<CategoryID>of();
@@ -168,7 +168,7 @@ public class CreateGenreUseCaseTest extends UseCaseTest {
     }
 
     @Test
-    public void givenAValidCommand_whenCallsCreateGenreAndSomeCategoriesDoesNotExists_shouldReturnDomainException() {
+    public void givenValidCommand_whenCallsCreateGenreAndSomeCategoriesDoesNotExists_shouldReturnDomainException() {
         final var filmes = CategoryID.from("456");
         final var series = CategoryID.from("123");
         final var documentarios = CategoryID.from("789");
@@ -197,7 +197,7 @@ public class CreateGenreUseCaseTest extends UseCaseTest {
     }
 
     @Test
-    public void givenAInvalidName_whenCallsCreateGenreAndSomeCategoriesDoesNotExists_shouldReturnDomainException() {
+    public void givenInvalidName_whenCallsCreateGenreAndSomeCategoriesDoesNotExists_shouldReturnDomainException() {
         final var filmes = CategoryID.from("456");
         final var series = CategoryID.from("123");
         final var documentarios = CategoryID.from("789");

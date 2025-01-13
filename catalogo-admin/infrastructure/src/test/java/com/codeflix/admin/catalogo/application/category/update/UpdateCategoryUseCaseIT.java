@@ -66,7 +66,7 @@ public class UpdateCategoryUseCaseIT {
     }
 
     @Test
-    public void givenAInvalidName_whenCallsUpdateCategory_thenShouldReturnDomainException() {
+    public void givenInvalidName_whenCallsUpdateCategory_thenShouldReturnDomainException() {
         final var category =
                 Category.newCategory("Film", null, true);
         save(category);
