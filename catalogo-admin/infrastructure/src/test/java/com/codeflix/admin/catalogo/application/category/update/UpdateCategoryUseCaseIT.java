@@ -30,7 +30,7 @@ public class UpdateCategoryUseCaseIT {
     }
 
     @Test
-    public void givenValidCommand_whenCallsUpdateCategory_thenShouldReturnCategoryId() throws Exception {
+    public void givenValidCommand_whenCallsUpdateCategory_thenShouldReturnCategoryId() {
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = true;

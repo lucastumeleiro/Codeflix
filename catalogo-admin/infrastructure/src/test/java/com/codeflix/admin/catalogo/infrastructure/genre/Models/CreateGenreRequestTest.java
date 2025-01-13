@@ -43,7 +43,7 @@ class CreateGenreRequestTest {
                   "name": "%s",
                   "categories_id": ["%s"],
                   "is_active": %s
-                }  
+                }
                 """.formatted(expectedName, expectedCategory, expectedIsActive);
 
         final var actualJson = this.json.parse(json);

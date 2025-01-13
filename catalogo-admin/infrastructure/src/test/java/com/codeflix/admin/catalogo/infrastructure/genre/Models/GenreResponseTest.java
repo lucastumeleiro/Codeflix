@@ -67,7 +67,7 @@ public class GenreResponseTest {
                   "created_at": "%s",
                   "deleted_at": "%s",
                   "updated_at": "%s"
-                }    
+                }
                 """.formatted(
                 expectedId,
                 expectedName,
