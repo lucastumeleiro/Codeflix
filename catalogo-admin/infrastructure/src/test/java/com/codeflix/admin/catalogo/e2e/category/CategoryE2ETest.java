@@ -2,11 +2,9 @@ package com.codeflix.admin.catalogo.e2e.category;
 
 import com.codeflix.admin.catalogo.E2ETest;
 import com.codeflix.admin.catalogo.domain.category.CategoryID;
-import com.codeflix.admin.catalogo.infrastructure.category.models.CategoryResponse;
-import com.codeflix.admin.catalogo.infrastructure.category.models.CreateCategoryRequest;
+import com.codeflix.admin.catalogo.e2e.MockDsl;
 import com.codeflix.admin.catalogo.infrastructure.category.models.UpdateCategoryRequest;
 import com.codeflix.admin.catalogo.infrastructure.category.persistence.CategoryRepository;
-import com.codeflix.admin.catalogo.infrastructure.configuration.json.Json;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,22 +13,18 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.util.Objects;
-
 @E2ETest
 @Testcontainers
-public class CategoryE2ETest {
+public class CategoryE2ETest implements MockDsl {
 
     @Autowired
     private MockMvc mvc;
-
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -45,6 +39,10 @@ public class CategoryE2ETest {
         registry.add("mysql.port", () -> MY_SQL_CONTAINER.getMappedPort(3306));
     }
 
+    @Override
+    public MockMvc mvc() {
+        return this.mvc;
+    }
 
     @Test
     public void asCatalogAdmin_ShouldBeAbleToCreateNewCategoryWithValidValues() throws Exception {
@@ -157,7 +155,7 @@ public class CategoryE2ETest {
 
         final var actualId = givenCategory(expectedName, expectedDescription, expectedIsActive);
 
-        final var actualCategory = retrieveCategory(actualId.getValue());
+        final var actualCategory = retrieveCategory(actualId);
 
         Assertions.assertEquals(expectedName, actualCategory.name());
         Assertions.assertEquals(expectedDescription, actualCategory.description());
@@ -282,71 +280,5 @@ public class CategoryE2ETest {
 
         Assertions.assertEquals(0, categoryRepository.count());
     }
-
-    private ResultActions listCategories(final int page, final int perPage, String description) throws Exception {
-        return listCategories(page, perPage, description, "", "");
-    }
-
-    private ResultActions listCategories(final int page, final int perPage) throws Exception {
-        return listCategories(page, perPage, "", "", "");
-    }
-
-    private ResultActions listCategories(final int page, final int perPage, final String search, final String sort, final String direction) throws Exception {
-        final var request = MockMvcRequestBuilders.get("/categories")
-                .queryParam("page", String.valueOf(page))
-                .queryParam("page", String.valueOf(perPage))
-                .queryParam("search", search)
-                .queryParam("sort", sort)
-                .queryParam("direction", direction)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON);
-
-        return this.mvc.perform(request);
-    }
-
-    private CategoryID givenCategory(final String name, final String description, final boolean isActive) throws Exception {
-        final var requestBody = new CreateCategoryRequest(name, description, isActive);
-
-        final var request = MockMvcRequestBuilders.post("/categories")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(Json.writeValueAsString(requestBody));
-
-        final var actualId = Objects.requireNonNull(this.mvc.perform(request)
-                        .andExpect(MockMvcResultMatchers.status().isCreated())
-                        .andReturn()
-                        .getResponse().getHeader("Location"))
-                .replace("/categories/", "");
-
-        return CategoryID.from(actualId);
-    }
-
-    private CategoryResponse retrieveCategory(final String id) throws Exception {
-        final var request = MockMvcRequestBuilders.get("/categories/" + id)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON);
-
-        final var json = this.mvc.perform(request)
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andReturn()
-                .getResponse().getContentAsString();
-
-        return Json.readValue(json, CategoryResponse.class);
-    }
-
-    private ResultActions updateCategory(CategoryID id, UpdateCategoryRequest requestBody) throws Exception {
-        final var request = MockMvcRequestBuilders.put("/categories/" + id.getValue())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(Json.writeValueAsString(requestBody));
-
-        return this.mvc.perform(request);
-    }
-
-    private ResultActions deleteCategory(CategoryID id) throws Exception {
-        final var request = MockMvcRequestBuilders.put("/categories/" + id.getValue())
-                .contentType(MediaType.APPLICATION_JSON);
-
-        return this.mvc.perform(request);
-    }
-
 }
 

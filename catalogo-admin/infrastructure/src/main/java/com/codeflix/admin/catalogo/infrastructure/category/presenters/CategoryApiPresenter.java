@@ -1,6 +1,7 @@
 package com.codeflix.admin.catalogo.infrastructure.category.presenters;
 
 import com.codeflix.admin.catalogo.application.category.retrieve.get.CategoryOutput;
+import com.codeflix.admin.catalogo.application.category.retrieve.list.CategoryListOutput;
 import com.codeflix.admin.catalogo.infrastructure.category.models.CategoryResponse;
 import com.codeflix.admin.catalogo.infrastructure.category.models.CategoryListResponse;
 
@@ -18,7 +19,7 @@ public interface CategoryApiPresenter {
         );
     }
 
-    static CategoryListResponse present(final com.codeflix.admin.catalogo.application.category.retrieve.list.CategoryListOutput output) {
+    static CategoryListResponse present(final CategoryListOutput output) {
         return new CategoryListResponse(
                 output.id().getValue(),
                 output.name(),
