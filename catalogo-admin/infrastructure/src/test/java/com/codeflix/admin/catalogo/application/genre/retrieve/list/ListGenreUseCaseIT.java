@@ -46,10 +46,10 @@ public class ListGenreUseCaseIT{
                 .map(GenreListOutput::from)
                 .toList();
 
-        final var aQuery =
+        final var query =
                 new SearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
 
-        final var actualOutput = useCase.execute(aQuery);
+        final var actualOutput = useCase.execute(query);
 
         Assertions.assertEquals(expectedPage, actualOutput.currentPage());
         Assertions.assertEquals(expectedPerPage, actualOutput.perPage());
@@ -73,10 +73,10 @@ public class ListGenreUseCaseIT{
 
         final var expectedItems = List.<GenreListOutput>of();
 
-        final var aQuery =
+        final var query =
                 new SearchQuery(expectedPage, expectedPerPage, expectedTerms, expectedSort, expectedDirection);
 
-        final var actualOutput = useCase.execute(aQuery);
+        final var actualOutput = useCase.execute(query);
 
         Assertions.assertEquals(expectedPage, actualOutput.currentPage());
         Assertions.assertEquals(expectedPerPage, actualOutput.perPage());

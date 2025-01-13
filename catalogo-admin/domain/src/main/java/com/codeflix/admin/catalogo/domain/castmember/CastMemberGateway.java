@@ -8,15 +8,15 @@ import java.util.Optional;
 
 public interface CastMemberGateway {
 
-    CastMember create(CastMember aCastMember);
+    CastMember create(CastMember castMember);
 
-    void deleteById(CastMemberID anId);
+    void deleteById(CastMemberID id);
 
-    Optional<CastMember> findById(CastMemberID anId);
+    Optional<CastMember> findById(CastMemberID id);
 
-    CastMember update(CastMember aCastMember);
+    CastMember update(CastMember castMember);
 
-    Pagination<CastMember> findAll(SearchQuery aQuery);
+    Pagination<CastMember> findAll(SearchQuery query);
 
     List<CastMemberID> existsByIds(Iterable<CastMemberID> ids);
 }

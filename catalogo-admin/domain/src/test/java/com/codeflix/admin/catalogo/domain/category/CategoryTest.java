@@ -1,11 +1,12 @@
 package com.codeflix.admin.catalogo.domain.category;
 
+import com.codeflix.admin.catalogo.domain.UnitTest;
 import com.codeflix.admin.catalogo.domain.exceptions.DomainException;
 import com.codeflix.admin.catalogo.domain.validation.handler.ThrowsValidationHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CategoryTest {
+public class CategoryTest extends UnitTest {
 
     @Test
     public void givenValidParams_whenCallNewCategory_thenInstantiateACategory() {

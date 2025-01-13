@@ -16,49 +16,49 @@ public class CastMember extends AggregateRoot<CastMemberID> {
     private Instant updatedAt;
 
     protected CastMember(
-    final CastMemberID anId,
-    final String aName,
-    final CastMemberType aType,
-    final Instant aCreationDate,
-    final Instant aUpdateDate
+    final CastMemberID id,
+    final String name,
+    final CastMemberType type,
+    final Instant creationDate,
+    final Instant updateDate
     ) {
-        super(anId);
-        this.name = aName;
-        this.type = aType;
-        this.createdAt = aCreationDate;
-        this.updatedAt = aUpdateDate;
+        super(id);
+        this.name = name;
+        this.type = type;
+        this.createdAt = creationDate;
+        this.updatedAt = updateDate;
         selfValidate();
     }
 
-    public static CastMember newMember(final String aName, final CastMemberType aType) {
-        final var anId = CastMemberID.unique();
+    public static CastMember newMember(final String name, final CastMemberType type) {
+        final var id = CastMemberID.unique();
         final var now = InstantUtils.now();
-        return new CastMember(anId, aName, aType, now, now);
+        return new CastMember(id, name, type, now, now);
     }
 
     public static CastMember with(
-    final CastMemberID anId,
-    final String aName,
-    final CastMemberType aType,
-    final Instant aCreationDate,
-    final Instant aUpdateDate
+    final CastMemberID id,
+    final String name,
+    final CastMemberType type,
+    final Instant creationDate,
+    final Instant updateDate
     ) {
-        return new CastMember(anId, aName, aType, aCreationDate, aUpdateDate);
+        return new CastMember(id, name, type, creationDate, updateDate);
     }
 
-    public static CastMember with(final CastMember aMember) {
+    public static CastMember with(final CastMember member) {
         return new CastMember(
-                aMember.id,
-                aMember.name,
-                aMember.type,
-                aMember.createdAt,
-                aMember.updatedAt
+                member.id,
+                member.name,
+                member.type,
+                member.createdAt,
+                member.updatedAt
         );
     }
 
-    public CastMember update(final String aName, final CastMemberType aType) {
-        this.name = aName;
-        this.type = aType;
+    public CastMember update(final String name, final CastMemberType type) {
+        this.name = name;
+        this.type = type;
         this.updatedAt = InstantUtils.now();
         selfValidate();
         return this;

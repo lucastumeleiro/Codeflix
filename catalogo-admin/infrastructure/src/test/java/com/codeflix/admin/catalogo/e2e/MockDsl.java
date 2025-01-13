@@ -31,8 +31,8 @@ public interface MockDsl {
         return this.delete("/categories/", id);
     }
 
-    default CategoryID givenCategory(final String aName, final String aDescription, final boolean isActive) throws Exception {
-        final var aRequestBody = new CreateCategoryRequest(aName, aDescription, isActive);
+    default CategoryID givenCategory(final String name, final String description, final boolean isActive) throws Exception {
+        final var aRequestBody = new CreateCategoryRequest(name, description, isActive);
         final var actualId = this.given("/categories", aRequestBody);
         return CategoryID.from(actualId);
     }
@@ -64,8 +64,8 @@ public interface MockDsl {
         return this.delete("/genres/", id);
     }
 
-    default GenreID givenGenre(final String aName, final boolean isActive, final List<CategoryID> categories) throws Exception {
-        final var aRequestBody = new CreateGenreRequest(aName, mapTo(categories, CategoryID::getValue), isActive);
+    default GenreID givenGenre(final String name, final boolean isActive, final List<CategoryID> categories) throws Exception {
+        final var aRequestBody = new CreateGenreRequest(name, mapTo(categories, CategoryID::getValue), isActive);
         final var actualId = this.given("/genres", aRequestBody);
         return GenreID.from(actualId);
     }
