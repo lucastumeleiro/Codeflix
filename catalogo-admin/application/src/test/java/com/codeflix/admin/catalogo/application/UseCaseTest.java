@@ -1,10 +1,6 @@
 package com.codeflix.admin.catalogo.application;
 
 import com.codeflix.admin.catalogo.domain.Identifier;
-import com.codeflix.admin.catalogo.domain.castmember.CastMember;
-import com.codeflix.admin.catalogo.domain.castmember.CastMemberType;
-import com.codeflix.admin.catalogo.domain.category.Category;
-import com.codeflix.admin.catalogo.domain.genre.Genre;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtendWith;
