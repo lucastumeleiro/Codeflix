@@ -1,6 +1,7 @@
 package com.codeflix.admin.catalogo.application.castmember.retrieve.get;
 
 import com.codeflix.admin.catalogo.application.UseCaseTest;
+import com.codeflix.admin.catalogo.domain.Fixture;
 import com.codeflix.admin.catalogo.domain.castmember.CastMember;
 import com.codeflix.admin.catalogo.domain.castmember.CastMemberGateway;
 import com.codeflix.admin.catalogo.domain.castmember.CastMemberID;
