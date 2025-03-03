@@ -255,7 +255,6 @@ public class Video extends AggregateRoot<VideoID> {
                 categories,
                 genres,
                 members
-//                null
         );
     }
 

@@ -6,14 +6,14 @@ import java.util.Optional;
 
 public interface VideoGateway {
 
-    Video create(Video aVideo);
+    Video create(Video video);
 
-    void deleteById(VideoID anId);
+    void deleteById(VideoID id);
 
-    Optional<Video> findById(VideoID anId);
+    Optional<Video> findById(VideoID id);
 
-    Video update(Video aVideo);
+    Video update(Video video);
 
-    Pagination<VideoPreview> findAll(VideoSearchQuery aQuery);
+    Pagination<VideoPreview> findAll(VideoSearchQuery query);
 
 }
