@@ -9,6 +9,7 @@ import com.codeflix.admin.catalogo.domain.exceptions.NotFoundException;
 import com.codeflix.admin.catalogo.infrastructure.castmember.persistence.CastMemberJpaEntity;
 import com.codeflix.admin.catalogo.infrastructure.castmember.persistence.CastMemberRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,11 @@ public class GetCastMemberUseCaseIT {
 
     @MockitoSpyBean
     private CastMemberGateway castMemberGateway;
+
+    @BeforeEach
+    void cleanUp() {
+        castMemberRepository.deleteAll();
+    }
 
     @Test
     public void givenValidId_whenGetCastMember_shouldReturnIt() {

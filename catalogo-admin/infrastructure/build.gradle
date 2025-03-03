@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.flywaydb:flyway-mysql:9.11.0'
+        classpath 'org.flywaydb:flyway-mysql:10.22.0'
     }
 }
 
@@ -12,10 +12,11 @@ plugins {
     id 'application'
     id 'org.springframework.boot' version '3.4.0'
     id 'io.spring.dependency-management' version '1.1.6'
-    id 'org.flywaydb.flyway' version '9.11.0'
+    id 'org.flywaydb.flyway' version '10.22.0'
 }
 
 group = 'com.codeflix.admin.catalogo.infrastructure'
+version '1.0-SNAPSHOT'
 
 bootJar {
     archiveFileName = 'application.jar'
@@ -44,7 +45,8 @@ dependencies {
 
     implementation('com.fasterxml.jackson.module:jackson-module-afterburner')
 
-    testImplementation(project(path: ':domain', configuration: 'testClasses'))
+//    testImplementation(project(path: ':domain', configuration: 'testClasses'))
+
     testImplementation('org.flywaydb:flyway-core')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 

@@ -8,6 +8,7 @@ import com.codeflix.admin.catalogo.domain.pagination.SearchQuery;
 import com.codeflix.admin.catalogo.infrastructure.castmember.persistence.CastMemberJpaEntity;
 import com.codeflix.admin.catalogo.infrastructure.castmember.persistence.CastMemberRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class ListCastMemberUseCaseIT {
 
     @MockitoSpyBean
     private CastMemberGateway castMemberGateway;
+
+    @BeforeEach
+    void mockUp() {
+        castMemberRepository.deleteAll();
+    }
 
     @Test
     public void givenAValidQuery_whenCallsListCastMembers_shouldReturnAll() {

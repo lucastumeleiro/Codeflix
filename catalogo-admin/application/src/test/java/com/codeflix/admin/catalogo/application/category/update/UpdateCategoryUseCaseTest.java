@@ -52,7 +52,7 @@ public class UpdateCategoryUseCaseTest extends UseCaseTest {
         Mockito.when(gateway.update(Mockito.any()))
                 .thenAnswer(returnsFirstArg());
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         final var actualOutput = useCase.execute(command).get();
 
@@ -94,7 +94,7 @@ public class UpdateCategoryUseCaseTest extends UseCaseTest {
 
         final var actualOutput = useCase.execute(command).get();
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         Assertions.assertNotNull(actualOutput);
         Assertions.assertNotNull(actualOutput.id());
@@ -165,7 +165,7 @@ public class UpdateCategoryUseCaseTest extends UseCaseTest {
         Mockito.when(gateway.findById(Mockito.eq(expectedId)))
                 .thenReturn(Optional.of(Category.with(category)));
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         Mockito.when(gateway.update(Mockito.any()))
                 .thenThrow(new IllegalStateException(expectedErrorMessage));

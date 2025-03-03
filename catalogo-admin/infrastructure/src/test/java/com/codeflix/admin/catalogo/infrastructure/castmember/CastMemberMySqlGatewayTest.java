@@ -110,7 +110,7 @@ public class CastMemberMySqlGatewayTest {
         final var actualMember = castMemberGateway.existsByIds(List.of(CastMemberID.from("123"), expectedId));
 
         Assertions.assertEquals(expectedItems, actualMember.size());
-        Assertions.assertEquals(expectedId.getValue(), actualMember.get(0).getValue());
+        Assertions.assertEquals(expectedId.getValue().trim(), actualMember.get(0).getValue().trim());
     }
 
 

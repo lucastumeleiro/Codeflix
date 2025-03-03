@@ -111,7 +111,7 @@ public class CastMemberTest extends UnitTest {
         final var actualCreatedAt = actualMember.getCreatedAt();
         final var actualUpdatedAt = actualMember.getUpdatedAt();
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         actualMember.update(expectedName, expectedType);
 

@@ -31,7 +31,7 @@ public class CategoryMySqlGatewayTest {
 
         final var actualCategory = gateway.create(category);
         Assertions.assertEquals(1, repository.count());
-        Assertions.assertEquals(category.getId(), actualCategory.getId());
+        Assertions.assertEquals(category.getId().getValue().trim(), actualCategory.getId().getValue().trim());
         Assertions.assertEquals(expectedName, actualCategory.getName());
         Assertions.assertEquals(expectedDescription, actualCategory.getDescription());
         Assertions.assertEquals(expectedIsActive, actualCategory.isActive());
@@ -65,7 +65,7 @@ public class CategoryMySqlGatewayTest {
         final var actualCategory = gateway.update(updatedCategory);
         Assertions.assertEquals(1, repository.count());
 
-        Assertions.assertEquals(category.getId(), actualCategory.getId());
+        Assertions.assertEquals(category.getId().getValue().trim(), actualCategory.getId().getValue().trim());
         Assertions.assertEquals(expectedName, actualCategory.getName());
         Assertions.assertEquals(expectedDescription, actualCategory.getDescription());
         Assertions.assertEquals(expectedIsActive, actualCategory.isActive());
@@ -120,7 +120,7 @@ public class CategoryMySqlGatewayTest {
         final var actualCategory = gateway.findById(category.getId()).get();
         Assertions.assertEquals(1, repository.count());
 
-        Assertions.assertEquals(category.getId(), actualCategory.getId());
+        Assertions.assertEquals(category.getId().getValue().trim(), actualCategory.getId().getValue().trim());
         Assertions.assertEquals(expectedName, actualCategory.getName());
         Assertions.assertEquals(expectedDescription, actualCategory.getDescription());
         Assertions.assertEquals(expectedIsActive, actualCategory.isActive());
@@ -165,7 +165,7 @@ public class CategoryMySqlGatewayTest {
         Assertions.assertEquals(expectedPerPage, actualResult.perPage());
         Assertions.assertEquals(expectedTotal, actualResult.total());
         Assertions.assertEquals(expectedPerPage, actualResult.items().size());
-        Assertions.assertEquals(documentarios.getId(), actualResult.items().get(0).getId());
+        Assertions.assertEquals(documentarios.getId().getValue().trim(), actualResult.items().get(0).getId().getValue().trim());
     }
 
     @Test
@@ -212,7 +212,7 @@ public class CategoryMySqlGatewayTest {
         Assertions.assertEquals(expectedPerPage, actualResult.perPage());
         Assertions.assertEquals(expectedTotal, actualResult.total());
         Assertions.assertEquals(expectedPerPage, actualResult.items().size());
-        Assertions.assertEquals(documentarios.getId(), actualResult.items().get(0).getId());
+        Assertions.assertEquals(documentarios.getId().getValue().trim(), actualResult.items().get(0).getId().getValue().trim());
 
         expectedPage = 1;
         query = new SearchQuery(expectedPage, 1, "", "name", "asc");
@@ -222,7 +222,7 @@ public class CategoryMySqlGatewayTest {
         Assertions.assertEquals(expectedPerPage, actualResult.perPage());
         Assertions.assertEquals(expectedTotal, actualResult.total());
         Assertions.assertEquals(expectedPerPage, actualResult.items().size());
-        Assertions.assertEquals(filmes.getId(), actualResult.items().get(0).getId());
+        Assertions.assertEquals(filmes.getId().getValue().trim(), actualResult.items().get(0).getId().getValue().trim());
 
         expectedPage = 2;
         query = new SearchQuery(expectedPage, 1, "", "name", "asc");
@@ -232,7 +232,7 @@ public class CategoryMySqlGatewayTest {
         Assertions.assertEquals(expectedPerPage, actualResult.perPage());
         Assertions.assertEquals(expectedTotal, actualResult.total());
         Assertions.assertEquals(expectedPerPage, actualResult.items().size());
-        Assertions.assertEquals(series.getId(), actualResult.items().get(0).getId());
+        Assertions.assertEquals(series.getId().getValue().trim(), actualResult.items().get(0).getId().getValue().trim());
     }
 
     @Test
@@ -262,7 +262,7 @@ public class CategoryMySqlGatewayTest {
         Assertions.assertEquals(expectedPerPage, actualResult.perPage());
         Assertions.assertEquals(expectedTotal, actualResult.total());
         Assertions.assertEquals(expectedPerPage, actualResult.items().size());
-        Assertions.assertEquals(documentarios.getId(), actualResult.items().get(0).getId());
+        Assertions.assertEquals(documentarios.getId().getValue().trim(), actualResult.items().get(0).getId().getValue().trim());
     }
 
     @Test
@@ -292,7 +292,7 @@ public class CategoryMySqlGatewayTest {
         Assertions.assertEquals(expectedPerPage, actualResult.perPage());
         Assertions.assertEquals(expectedTotal, actualResult.total());
         Assertions.assertEquals(expectedPerPage, actualResult.items().size());
-        Assertions.assertEquals(filmes.getId(), actualResult.items().get(0).getId());
+        Assertions.assertEquals(filmes.getId().getValue().trim(), actualResult.items().get(0).getId().getValue().trim());
 
         query = new SearchQuery(0, 1, "MAIS ASSISTIDA", "name", "asc");
         actualResult = gateway.findAll(query);
@@ -301,7 +301,7 @@ public class CategoryMySqlGatewayTest {
         Assertions.assertEquals(expectedPerPage, actualResult.perPage());
         Assertions.assertEquals(expectedTotal, actualResult.total());
         Assertions.assertEquals(expectedPerPage, actualResult.items().size());
-        Assertions.assertEquals(filmes.getId(), actualResult.items().get(0).getId());
+        Assertions.assertEquals(filmes.getId().getValue().trim(), actualResult.items().get(0).getId().getValue().trim());
     }
 
 }

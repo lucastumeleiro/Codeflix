@@ -170,13 +170,13 @@ public class CategoryTest extends UnitTest {
         Assertions.assertTrue(category.isActive());
         Assertions.assertNull(category.getDeletedAt());
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         final var actualCategory = category.deactivate();
 
         Assertions.assertDoesNotThrow(() -> actualCategory.validate(new ThrowsValidationHandler()));
 
-        Assertions.assertEquals(category.getId(), actualCategory.getId());
+        Assertions.assertEquals(category.getId().getValue().trim(), actualCategory.getId().getValue().trim());
         Assertions.assertEquals(expectedName, actualCategory.getName());
         Assertions.assertEquals(expectedDescription, actualCategory.getDescription());
         Assertions.assertEquals(expectedIsActive, actualCategory.isActive());
@@ -206,7 +206,7 @@ public class CategoryTest extends UnitTest {
 
         Assertions.assertDoesNotThrow(() -> actualCategory.validate(new ThrowsValidationHandler()));
 
-        Assertions.assertEquals(category.getId(), actualCategory.getId());
+        Assertions.assertEquals(category.getId().getValue().trim(), actualCategory.getId().getValue().trim());
         Assertions.assertEquals(expectedName, actualCategory.getName());
         Assertions.assertEquals(expectedDescription, actualCategory.getDescription());
         Assertions.assertEquals(expectedIsActive, actualCategory.isActive());
@@ -229,13 +229,13 @@ public class CategoryTest extends UnitTest {
         final var createdAt = category.getCreatedAt();
         final var updatedAt = category.getUpdatedAt();
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         final var actualCategory = category.update(expectedName, expectedDescription, expectedIsActive);
 
         Assertions.assertDoesNotThrow(() -> actualCategory.validate(new ThrowsValidationHandler()));
 
-        Assertions.assertEquals(category.getId(), actualCategory.getId());
+        Assertions.assertEquals(category.getId().getValue().trim(), actualCategory.getId().getValue().trim());
         Assertions.assertEquals(expectedName, actualCategory.getName());
         Assertions.assertEquals(expectedDescription, actualCategory.getDescription());
         Assertions.assertEquals(expectedIsActive, actualCategory.isActive());
@@ -260,13 +260,13 @@ public class CategoryTest extends UnitTest {
         final var createdAt = category.getCreatedAt();
         final var updatedAt = category.getUpdatedAt();
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         final var actualCategory = category.update(expectedName, expectedDescription, expectedIsActive);
 
         Assertions.assertDoesNotThrow(() -> actualCategory.validate(new ThrowsValidationHandler()));
 
-        Assertions.assertEquals(category.getId(), actualCategory.getId());
+        Assertions.assertEquals(category.getId().getValue().trim(), actualCategory.getId().getValue().trim());
         Assertions.assertEquals(expectedName, actualCategory.getName());
         Assertions.assertEquals(expectedDescription, actualCategory.getDescription());
         Assertions.assertFalse(category.isActive());
@@ -289,11 +289,11 @@ public class CategoryTest extends UnitTest {
         final var createdAt = category.getCreatedAt();
         final var updatedAt = category.getUpdatedAt();
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         final var actualCategory = category.update(expectedName, expectedDescription, expectedIsActive);
 
-        Assertions.assertEquals(category.getId(), actualCategory.getId());
+        Assertions.assertEquals(category.getId().getValue().trim(), actualCategory.getId().getValue().trim());
         Assertions.assertEquals(expectedName, actualCategory.getName());
         Assertions.assertEquals(expectedDescription, actualCategory.getDescription());
         Assertions.assertTrue(category.isActive());

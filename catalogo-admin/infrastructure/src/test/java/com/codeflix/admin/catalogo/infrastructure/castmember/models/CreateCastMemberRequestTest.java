@@ -16,7 +16,7 @@ public class CreateCastMemberRequestTest {
     @Test
     public void testUnmarshall() throws Exception {
         final var expectedName = "Lucas";
-        final var expectedType = CastMemberType.ACTOR.toString();
+        final var expectedType = CastMemberType.ACTOR;
 
         final var json = """
                 {

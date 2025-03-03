@@ -56,7 +56,7 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
                 .thenAnswer(AdditionalAnswers.returnsFirstArg());
         final var actualOutput = useCase.execute(command);
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         Assertions.assertNotNull(actualOutput);
         Assertions.assertEquals(expectedId.getValue(), actualOutput.id());
@@ -103,7 +103,7 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
                 .thenAnswer(AdditionalAnswers.returnsFirstArg());
         final var actualOutput = useCase.execute(command);
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         Assertions.assertNotNull(actualOutput);
         Assertions.assertEquals(expectedId.getValue(), actualOutput.id());
@@ -145,7 +145,7 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
         Mockito.when(genreGateway.update(Mockito.any()))
                 .thenAnswer(AdditionalAnswers.returnsFirstArg());
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         Assertions.assertTrue(genre.isActive());
         Assertions.assertNull(genre.getDeletedAt());

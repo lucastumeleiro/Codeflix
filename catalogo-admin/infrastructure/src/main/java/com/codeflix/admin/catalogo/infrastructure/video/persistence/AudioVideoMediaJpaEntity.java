@@ -1,5 +1,9 @@
 package com.codeflix.admin.catalogo.infrastructure.video.persistence;
 
+import com.codeflix.admin.catalogo.domain.video.AudioVideoMedia;
+import com.codeflix.admin.catalogo.domain.video.MediaStatus;
+import jakarta.persistence.*;
+
 @Entity(name = "AudioVideoMedia")
 @Table(name = "videos_video_media")
 public class AudioVideoMediaJpaEntity {

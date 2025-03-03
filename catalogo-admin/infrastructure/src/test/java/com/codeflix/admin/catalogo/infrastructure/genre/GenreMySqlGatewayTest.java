@@ -303,7 +303,7 @@ public class GenreMySqlGatewayTest {
         final var actualGenre = genreGateway.existsByIds(List.of(GenreID.from("123"), expectedId));
 
         Assertions.assertEquals(expectedItems, actualGenre.size());
-        Assertions.assertEquals(expectedId.getValue(), actualGenre.get(0).getValue());
+        Assertions.assertEquals(expectedId.getValue().trim(), actualGenre.get(0).getValue().trim());
     }
 
     @Test

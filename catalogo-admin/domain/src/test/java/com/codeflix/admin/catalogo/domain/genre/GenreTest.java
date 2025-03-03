@@ -88,7 +88,7 @@ public class GenreTest extends UnitTest {
         final var actualCreatedAt = actualGenre.getCreatedAt();
         final var actualUpdatedAt = actualGenre.getUpdatedAt();
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         actualGenre.deactivate();
 
@@ -116,7 +116,7 @@ public class GenreTest extends UnitTest {
         final var actualCreatedAt = actualGenre.getCreatedAt();
         final var actualUpdatedAt = actualGenre.getUpdatedAt();
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         actualGenre.activate();
 
@@ -145,7 +145,7 @@ public class GenreTest extends UnitTest {
         final var actualCreatedAt = actualGenre.getCreatedAt();
         final var actualUpdatedAt = actualGenre.getUpdatedAt();
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         actualGenre.update(expectedName, expectedIsActive, expectedCategories);
 
@@ -173,7 +173,7 @@ public class GenreTest extends UnitTest {
         final var actualCreatedAt = actualGenre.getCreatedAt();
         final var actualUpdatedAt = actualGenre.getUpdatedAt();
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         actualGenre.update(expectedName, expectedIsActive, expectedCategories);
 
@@ -229,7 +229,7 @@ public class GenreTest extends UnitTest {
         final var actualCreatedAt = actualGenre.getCreatedAt();
         final var actualUpdatedAt = actualGenre.getUpdatedAt();
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         Assertions.assertDoesNotThrow(() -> {
             actualGenre.update(expectedName, expectedIsActive, null);
@@ -257,7 +257,7 @@ public class GenreTest extends UnitTest {
 
         Assertions.assertEquals(0, actualGenre.getCategories().size());
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         final var actualCreatedAt = actualGenre.getCreatedAt();
         final var actualUpdatedAt = actualGenre.getUpdatedAt();
@@ -316,7 +316,7 @@ public class GenreTest extends UnitTest {
         final var actualCreatedAt = actualGenre.getCreatedAt();
         final var actualUpdatedAt = actualGenre.getUpdatedAt();
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         actualGenre.removeCategory(seriesID);
 
@@ -373,7 +373,7 @@ public class GenreTest extends UnitTest {
         final var actualCreatedAt = actualGenre.getCreatedAt();
         final var actualUpdatedAt = actualGenre.getUpdatedAt();
 
-        Thread.sleep(10); //Se rodar o teste individual passa, se rodar todos os testes juntos da erro. So funciona com um sleep. O erro ocorre pelo updatedAt ser igual se não tiver o sleep...
+        Thread.sleep(10);
 
         actualGenre.addCategories(expectedCategories);
 

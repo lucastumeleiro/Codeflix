@@ -8,7 +8,6 @@ public final class IdUtils {
     }
 
     public static String uuid() {
-//        return UUID.randomUUID().toString().toLowerCase().replace("-", "");
-        return UUID.randomUUID().toString();
+        return UUID.randomUUID().toString().toLowerCase().replace("-", "");
     }
 }
