@@ -42,6 +42,8 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
         final var expectedIsActive = true;
         final var expectedCategories = List.<CategoryID>of();
 
+        Thread.sleep(10);
+
         final var command = UpdateGenreCommand.with(
                 expectedId.getValue(),
                 expectedName,
@@ -103,7 +105,7 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
                 .thenAnswer(AdditionalAnswers.returnsFirstArg());
         final var actualOutput = useCase.execute(command);
 
-        Thread.sleep(10);
+        Thread.sleep(50);
 
         Assertions.assertNotNull(actualOutput);
         Assertions.assertEquals(expectedId.getValue(), actualOutput.id());
