@@ -2,6 +2,8 @@ package com.codeflix.admin.catalogo.infrastructure.video;
 
 
 import com.codeflix.admin.catalogo.domain.video.*;
+import com.codeflix.admin.catalogo.infrastructure.configuration.properties.storage.StorageProperties;
+import com.codeflix.admin.catalogo.infrastructure.services.StorageService;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -11,16 +13,12 @@ public class DefaultMediaResourceGateway implements MediaResourceGateway {
 
     private final String filenamePattern;
     private final String locationPattern;
-//    private final StorageService storageService;
+    private final StorageService storageService;
 
-//    public DefaultMediaResourceGateway(final StorageProperties props, final StorageService storageService) {
-//        this.filenamePattern = props.getFilenamePattern();
-//        this.locationPattern = props.getLocationPattern();
-//        this.storageService = storageService;
-//    }
-    public DefaultMediaResourceGateway() {
-        this.filenamePattern = "";
-        this.locationPattern = "";
+    public DefaultMediaResourceGateway(final StorageProperties props, final StorageService storageService) {
+        this.filenamePattern = props.getFilenamePattern();
+        this.locationPattern = props.getLocationPattern();
+        this.storageService = storageService;
     }
 
     @Override
@@ -41,14 +39,13 @@ public class DefaultMediaResourceGateway implements MediaResourceGateway {
 
     @Override
     public Optional<Resource> getResource(final VideoID id, final VideoMediaType type) {
-//        return this.storageService.get(filepath(id, type));
-        return Optional.empty();
+        return this.storageService.get(filepath(id, type));
     }
 
     @Override
     public void clearResources(final VideoID id) {
-//        final var ids = this.storageService.list(folder(id));
-//        this.storageService.deleteAll(ids);
+        final var ids = this.storageService.list(folder(id));
+        this.storageService.deleteAll(ids);
     }
 
     private String filename(final VideoMediaType type) {
@@ -66,6 +63,6 @@ public class DefaultMediaResourceGateway implements MediaResourceGateway {
     }
 
     private void store(final String filepath, final Resource resource) {
-//        this.storageService.store(filepath, resource);
+        this.storageService.store(filepath, resource);
     }
 }

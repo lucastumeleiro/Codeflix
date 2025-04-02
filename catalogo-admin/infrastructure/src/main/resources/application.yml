@@ -12,6 +12,11 @@ google:
         retry-max-attempts: 2
         retry-multiplier: 1.0
 
+storage:
+  catalogo-videos:
+    filename-pattern: type-{type}
+    location-pattern: videoId-{videoId}
+
 logging:
   level:
     ROOT: INFO
