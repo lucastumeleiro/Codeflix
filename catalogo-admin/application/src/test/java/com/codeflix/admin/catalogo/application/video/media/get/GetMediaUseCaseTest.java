@@ -36,9 +36,9 @@ public class GetMediaUseCaseTest extends UseCaseTest {
         Mockito.when(mediaResourceGateway.getResource(expectedId, expectedType))
                 .thenReturn(Optional.of(expectedResource));
 
-        final var aCmd = GetMediaCommand.with(expectedId.getValue(), expectedType.name());
+        final var command = GetMediaCommand.with(expectedId.getValue(), expectedType.name());
 
-        final var actualResult = this.useCase.execute(aCmd);
+        final var actualResult = this.useCase.execute(command);
 
         Assertions.assertEquals(expectedResource.name(), actualResult.name());
         Assertions.assertEquals(expectedResource.content(), actualResult.content());
@@ -53,10 +53,10 @@ public class GetMediaUseCaseTest extends UseCaseTest {
         Mockito.when(mediaResourceGateway.getResource(expectedId, expectedType))
                 .thenReturn(Optional.empty());
 
-        final var aCmd = GetMediaCommand.with(expectedId.getValue(), expectedType.name());
+        final var command = GetMediaCommand.with(expectedId.getValue(), expectedType.name());
 
         Assertions.assertThrows(NotFoundException.class, () -> {
-            this.useCase.execute(aCmd);
+            this.useCase.execute(command);
         });
     }
 
@@ -65,10 +65,10 @@ public class GetMediaUseCaseTest extends UseCaseTest {
         final var expectedId = VideoID.unique();
         final var expectedErrorMessage = "Media type QUALQUER doesn't exists";
 
-        final var aCmd = GetMediaCommand.with(expectedId.getValue(), "QUALQUER");
+        final var command = GetMediaCommand.with(expectedId.getValue(), "QUALQUER");
 
         final var actualException = Assertions.assertThrows(NotFoundException.class, () -> {
-            this.useCase.execute(aCmd);
+            this.useCase.execute(command);
         });
 
         Assertions.assertEquals(expectedErrorMessage, actualException.getMessage());

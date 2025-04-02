@@ -12,8 +12,8 @@ public class VideoID extends Identifier {
         this.value = Objects.requireNonNull(value);
     }
 
-    public static VideoID from(final String anId) {
-        return new VideoID(anId.toLowerCase());
+    public static VideoID from(final String id) {
+        return new VideoID(id.toLowerCase());
     }
 
     public static VideoID unique() {

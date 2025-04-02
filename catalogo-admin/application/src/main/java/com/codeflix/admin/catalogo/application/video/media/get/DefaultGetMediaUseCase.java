@@ -22,11 +22,11 @@ public class DefaultGetMediaUseCase extends GetMediaUseCase {
         final var type = VideoMediaType.of(command.mediaType())
                 .orElseThrow(() -> typeNotFound(command.mediaType()));
 
-        final var aResource =
+        final var resource =
                 this.mediaResourceGateway.getResource(id, type)
                         .orElseThrow(() -> notFound(command.videoId(), command.mediaType()));
 
-        return MediaOutput.with(aResource);
+        return MediaOutput.with(resource);
     }
 
     private NotFoundException notFound(final String id, final String type) {
