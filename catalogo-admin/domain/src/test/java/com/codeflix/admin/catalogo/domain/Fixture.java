@@ -6,7 +6,7 @@ import com.codeflix.admin.catalogo.domain.castmember.CastMemberType;
 import com.codeflix.admin.catalogo.domain.category.Category;
 import com.codeflix.admin.catalogo.domain.genre.Genre;
 import com.codeflix.admin.catalogo.domain.video.*;
-import com.github.javafaker.Faker;
+import net.datafaker.Faker;
 
 import java.time.Year;
 import java.util.Set;
