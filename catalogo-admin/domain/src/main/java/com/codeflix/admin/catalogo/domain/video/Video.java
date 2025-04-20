@@ -55,11 +55,10 @@ public class Video extends AggregateRoot<VideoID> {
             final AudioVideoMedia video,
             final Set<CategoryID> categories,
             final Set<GenreID> genres,
-            final Set<CastMemberID> members
-//            final List<DomainEvent> domainEvents
+            final Set<CastMemberID> members,
+            final List<DomainEvent> domainEvents
     ) {
-//        super(id, domainEvents);
-        super(id);
+        super(id, domainEvents);
         this.title = title;
         this.description = description;
         this.launchedAt = launchYear;
@@ -254,7 +253,8 @@ public class Video extends AggregateRoot<VideoID> {
                 null,
                 categories,
                 genres,
-                members
+                members,
+                null
         );
     }
 
@@ -277,8 +277,8 @@ public class Video extends AggregateRoot<VideoID> {
                 video.getVideo().orElse(null),
                 new HashSet<>(video.getCategories()),
                 new HashSet<>(video.getGenres()),
-                new HashSet<>(video.getCastMembers())
-//                video.getDomainEvents()
+                new HashSet<>(video.getCastMembers()),
+                video.getDomainEvents()
         );
     }
 
@@ -320,8 +320,8 @@ public class Video extends AggregateRoot<VideoID> {
                 video,
                 categories,
                 genres,
-                members
-//                null
+                members,
+                null
         );
     }
 
@@ -351,7 +351,7 @@ public class Video extends AggregateRoot<VideoID> {
 
     private void onAudioVideoMediaUpdated(final AudioVideoMedia media) {
         if (media != null && media.isPendingEncode()) {
-//            this.registerEvent(new VideoMediaCreated(getId().getValue(), media.rawLocation()));
+            this.registerEvent(new VideoMediaCreated(getId().getValue(), media.rawLocation()));
         }
     }
 }

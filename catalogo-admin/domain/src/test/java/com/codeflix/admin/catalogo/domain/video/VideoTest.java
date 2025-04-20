@@ -65,7 +65,7 @@ public class VideoTest extends UnitTest {
         Assertions.assertTrue(actualVideo.getBanner().isEmpty());
         Assertions.assertTrue(actualVideo.getThumbnail().isEmpty());
         Assertions.assertTrue(actualVideo.getThumbnailHalf().isEmpty());
-        //Assertions.assertTrue(actualVideo.getDomainEvents().isEmpty());
+        Assertions.assertTrue(actualVideo.getDomainEvents().isEmpty());
 
         Assertions.assertDoesNotThrow(() -> actualVideo.validate(new ThrowsValidationHandler()));
     }
@@ -103,7 +103,7 @@ public class VideoTest extends UnitTest {
                 Set.of()
         );
 
-        //video.registerEvent(expectedEvent);
+        video.registerEvent(expectedEvent);
 
 
         Thread.sleep(10);
@@ -140,8 +140,8 @@ public class VideoTest extends UnitTest {
         Assertions.assertTrue(actualVideo.getThumbnail().isEmpty());
         Assertions.assertTrue(actualVideo.getThumbnailHalf().isEmpty());
 
-        //Assertions.assertEquals(expectedEventCount, actualVideo.getDomainEvents().size());
-        //Assertions.assertEquals(expectedEvent, actualVideo.getDomainEvents().get(0));
+        Assertions.assertEquals(expectedEventCount, actualVideo.getDomainEvents().size());
+        Assertions.assertEquals(expectedEvent, actualVideo.getDomainEvents().get(0));
 
         Assertions.assertDoesNotThrow(() -> actualVideo.validate(new ThrowsValidationHandler()));
     }
@@ -204,12 +204,12 @@ public class VideoTest extends UnitTest {
         Assertions.assertTrue(actualVideo.getThumbnail().isEmpty());
         Assertions.assertTrue(actualVideo.getThumbnailHalf().isEmpty());
 
-        //Assertions.assertEquals(expectedDomainEventSize, actualVideo.getDomainEvents().size());
+        Assertions.assertEquals(expectedDomainEventSize, actualVideo.getDomainEvents().size());
 
-        //final var actualEvent = (VideoMediaCreated) actualVideo.getDomainEvents().get(0);
-        //Assertions.assertEquals(video.getId().getValue(), actualEvent.resourceId());
-        //Assertions.assertEquals(videoMedia.rawLocation(), actualEvent.filePath());
-        //Assertions.assertNotNull(actualEvent.occurredOn());
+        final var actualEvent = (VideoMediaCreated) actualVideo.getDomainEvents().get(0);
+        Assertions.assertEquals(video.getId().getValue(), actualEvent.resourceId());
+        Assertions.assertEquals(videoMedia.rawLocation(), actualEvent.filePath());
+        Assertions.assertNotNull(actualEvent.occurredOn());
 
         Assertions.assertDoesNotThrow(() -> actualVideo.validate(new ThrowsValidationHandler()));
     }
@@ -272,12 +272,12 @@ public class VideoTest extends UnitTest {
         Assertions.assertTrue(actualVideo.getThumbnail().isEmpty());
         Assertions.assertTrue(actualVideo.getThumbnailHalf().isEmpty());
 
-        //Assertions.assertEquals(expectedDomainEventSize, actualVideo.getDomainEvents().size());
+        Assertions.assertEquals(expectedDomainEventSize, actualVideo.getDomainEvents().size());
 
-        //final var actualEvent = (VideoMediaCreated) actualVideo.getDomainEvents().get(0);
-        //Assertions.assertEquals(video.getId().getValue(), actualEvent.resourceId());
-        //Assertions.assertEquals(trailerMedia.rawLocation(), actualEvent.filePath());
-        //Assertions.assertNotNull(actualEvent.occurredOn());
+        final var actualEvent = (VideoMediaCreated) actualVideo.getDomainEvents().get(0);
+        Assertions.assertEquals(video.getId().getValue(), actualEvent.resourceId());
+        Assertions.assertEquals(trailerMedia.rawLocation(), actualEvent.filePath());
+        Assertions.assertNotNull(actualEvent.occurredOn());
 
         Assertions.assertDoesNotThrow(() -> actualVideo.validate(new ThrowsValidationHandler()));
     }
@@ -503,6 +503,6 @@ public class VideoTest extends UnitTest {
                 expectedMembers
         );
 
-        //Assertions.assertNotNull(actualVideo.getDomainEvents());
+        Assertions.assertNotNull(actualVideo.getDomainEvents());
     }
 }
