@@ -13,8 +13,4 @@ public class CatalogoAdminApplication {
         SpringApplication.run(WebServerConfig.class, args);
     }
 
-    @RabbitListener(queues = "video.encoded.queue")
-    void testListener() {
-    }
-
 }
