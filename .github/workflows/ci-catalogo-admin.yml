@@ -18,6 +18,9 @@ jobs:
         with:
           java-version: "17"
           distribution: "adopt"
+      - name: Make gradlew executable
+        working-directory: ./catalogo-admin
+        run: chmod +x ./gradlew
       - name: Run application tests
         working-directory: ./catalogo-admin
         run: ./gradlew test
