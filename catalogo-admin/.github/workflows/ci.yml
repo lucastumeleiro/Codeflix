@@ -2,7 +2,7 @@ name: CI Pipeline
 
 on:
   push:
-# Habilita o gatilho manual através da interface do Github Actions
+  # Habilita o gatilho manual através da interface do Github Actions
   workflow_dispatch:
 
 jobs:
