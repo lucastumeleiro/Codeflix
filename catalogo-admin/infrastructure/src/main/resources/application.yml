@@ -30,7 +30,6 @@ logging:
     ROOT: INFO
     com.codeflix.admin.catalogo: DEBUG
 
-
 server:
   port: 8080
   servlet:

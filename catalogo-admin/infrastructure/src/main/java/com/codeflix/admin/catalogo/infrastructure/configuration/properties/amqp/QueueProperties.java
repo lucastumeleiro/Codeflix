@@ -1,9 +1,8 @@
-package com.codeflix.admin.catalogo.infrastructure.configuration.amqp;
+package com.codeflix.admin.catalogo.infrastructure.configuration.properties.amqp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-
 
 public class QueueProperties implements InitializingBean {
 

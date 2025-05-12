@@ -20,7 +20,8 @@ group = 'com.codeflix.admin.catalogo.infrastructure'
 
 bootJar {
     archiveFileName = 'application.jar'
-    destinationDirectory.set(layout.buildDirectory.dir("libs"))
+    destinationDirectory.set(rootProject.layout.buildDirectory.dir("libs"))
+
 }
 
 repositories {

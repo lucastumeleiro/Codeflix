@@ -1,12 +1,6 @@
 package com.codeflix.admin.catalogo.infrastructure.configuration.properties.google;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
-
-public class GoogleStorageProperties implements InitializingBean {
-
-    private static final Logger log = LoggerFactory.getLogger(GoogleStorageProperties.class);
+public class GoogleStorageProperties {
 
     private String bucket;
     private int connectTimeout;
@@ -81,23 +75,4 @@ public class GoogleStorageProperties implements InitializingBean {
         this.retryMaxDelay = retryMaxDelay;
         return this;
     }
-
-    @Override
-    public void afterPropertiesSet() {
-        log.debug(toString());
-    }
-
-    @Override
-    public String toString() {
-        return "GoogleStorageProperties{" +
-                "bucket='" + bucket + '\'' +
-                ", connectTimeout=" + connectTimeout +
-                ", readTimeout=" + readTimeout +
-                ", retryDelay=" + retryDelay +
-                ", retryMaxDelay=" + retryMaxDelay +
-                ", retryMaxAttempts=" + retryMaxAttempts +
-                ", retryMultiplier=" + retryMultiplier +
-                '}';
-    }
 }
-

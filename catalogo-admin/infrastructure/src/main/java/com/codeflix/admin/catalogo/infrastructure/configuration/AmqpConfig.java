@@ -1,6 +1,6 @@
 package com.codeflix.admin.catalogo.infrastructure.configuration;
 
-import com.codeflix.admin.catalogo.infrastructure.configuration.amqp.QueueProperties;
+import com.codeflix.admin.catalogo.infrastructure.configuration.properties.amqp.QueueProperties;
 import com.codeflix.admin.catalogo.infrastructure.configuration.annotations.VideoCreatedQueue;
 import com.codeflix.admin.catalogo.infrastructure.configuration.annotations.VideoEncodedQueue;
 import com.codeflix.admin.catalogo.infrastructure.configuration.annotations.VideoEvents;

@@ -5,7 +5,7 @@ import com.codeflix.admin.catalogo.application.video.media.update.UpdateMediaSta
 import com.codeflix.admin.catalogo.application.video.media.update.UpdateMediaStatusUseCase;
 import com.codeflix.admin.catalogo.domain.Utils.IdUtils;
 import com.codeflix.admin.catalogo.domain.video.MediaStatus;
-import com.codeflix.admin.catalogo.infrastructure.configuration.amqp.QueueProperties;
+import com.codeflix.admin.catalogo.infrastructure.configuration.properties.amqp.QueueProperties;
 import com.codeflix.admin.catalogo.infrastructure.configuration.annotations.VideoEncodedQueue;
 import com.codeflix.admin.catalogo.infrastructure.configuration.json.Json;
 import com.codeflix.admin.catalogo.infrastructure.video.models.VideoEncoderCompleted;

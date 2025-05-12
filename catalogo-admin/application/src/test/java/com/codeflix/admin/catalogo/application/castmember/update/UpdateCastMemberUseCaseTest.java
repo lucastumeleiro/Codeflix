@@ -34,7 +34,7 @@ public class UpdateCastMemberUseCaseTest extends UseCaseTest {
     }
 
     @Test
-    public void givenValidCommand_whenCallsUpdateCastMember_shouldReturnItsIdentifier() {
+    public void givenValidCommand_whenCallsUpdateCastMember_shouldReturnItsIdentifier() throws Exception {
         final var member = CastMember.newMember("vin diesel", CastMemberType.DIRECTOR);
 
         final var expectedId = member.getId();
@@ -53,6 +53,7 @@ public class UpdateCastMemberUseCaseTest extends UseCaseTest {
         Mockito.when(castMemberGateway.update(Mockito.any()))
                 .thenAnswer(returnsFirstArg());
 
+        Thread.sleep(200);
         final var actualOutput = useCase.execute(command);
 
         Assertions.assertNotNull(actualOutput);
@@ -60,6 +61,7 @@ public class UpdateCastMemberUseCaseTest extends UseCaseTest {
 
         Mockito.verify(castMemberGateway).findById(Mockito.eq(expectedId));
 
+//        Mockito.verify(castMemberGateway).update(Mockito.any());
         Mockito.verify(castMemberGateway).update(Mockito.argThat(aUpdatedMember ->
                 Objects.equals(expectedId, aUpdatedMember.getId())
                         && Objects.equals(expectedName, aUpdatedMember.getName())

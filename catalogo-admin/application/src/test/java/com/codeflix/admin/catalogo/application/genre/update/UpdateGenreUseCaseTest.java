@@ -95,6 +95,8 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
                 asString(expectedCategories)
         );
 
+        Thread.sleep(50);
+
         Mockito.when(genreGateway.findById(Mockito.any()))
                 .thenReturn(Optional.of(Genre.with(genre)));
 
