@@ -56,7 +56,7 @@ jobs:
       - name: Build & push da imagem do docker
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: ./catalogo-admin
           push: true
           build-args: VERSION=${{ env.BUILD_TAG }}
           tags: ${{ env.IMAGE_NAME }}:${{ env.BUILD_TAG }}
