@@ -2,10 +2,10 @@ name: CI Pipeline Catalogo-admin
 
 on:
   push:
-    paths:
-      - "catalogo-admin/**"
     branches:
       - "main/**"
+    paths:
+      - "catalogo-admin/**"
   workflow_dispatch: # Habilita o gatilho manual através da interface do Github Actions
 
 jobs:
