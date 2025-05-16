@@ -4,8 +4,9 @@ on:
   push:
     paths:
       - "catalogo-admin/**"
-    # Habilita o gatilho manual através da interface do Github Actions
-  workflow_dispatch:
+    branches:
+      - "main/**"
+  workflow_dispatch: # Habilita o gatilho manual através da interface do Github Actions
 
 jobs:
   tests:
