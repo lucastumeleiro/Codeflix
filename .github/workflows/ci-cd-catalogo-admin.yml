@@ -47,13 +47,17 @@ jobs:
 
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+        with:
+          working-directory: ./catalogo-admin
 
       - name: Build da aplicação
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
         with:
           arguments: clean build -x test
+          working-directory: ./catalogo-admin
 
       - name: Set BUILD_TAG
+        working-directory: ./catalogo-admin
         run: |
           echo BUILD_TAG=$(echo ${{ github.head_ref || github.ref_name }} | sed "s,/,_,g")-${{ github.run_number }} >> $GITHUB_ENV
 
