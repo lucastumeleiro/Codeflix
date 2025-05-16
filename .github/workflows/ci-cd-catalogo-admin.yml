@@ -1,4 +1,4 @@
-name: CI-CD Pipeline Catalogo-admin
+name: CI-CD - Pipeline Catalogo-admin
 
 on:
   push:
