@@ -1,5 +1,6 @@
 package com.codeflix.admin.catalogo.e2e;
 
+import com.codeflix.admin.catalogo.ApiTest;
 import com.codeflix.admin.catalogo.domain.Identifier;
 import com.codeflix.admin.catalogo.domain.castmember.CastMemberID;
 import com.codeflix.admin.catalogo.domain.castmember.CastMemberType;
@@ -58,8 +59,8 @@ public interface MockDsl {
         return this.retrieve("/categories/", id, CategoryResponse.class);
     }
 
-    default ResultActions updateCategory(final CategoryID id, final UpdateCategoryRequest aRequest) throws Exception {
-        return this.update("/categories/", id, aRequest);
+    default ResultActions updateCategory(final CategoryID id, final UpdateCategoryRequest request) throws Exception {
+        return this.update("/categories/", id, request);
     }
 
     /**
@@ -91,8 +92,8 @@ public interface MockDsl {
         return this.retrieve("/genres/", id, GenreResponse.class);
     }
 
-    default ResultActions updateGenre(final GenreID id, final UpdateGenreRequest aRequest) throws Exception {
-        return this.update("/genres/", id, aRequest);
+    default ResultActions updateGenre(final GenreID id, final UpdateGenreRequest request) throws Exception {
+        return this.update("/genres/", id, request);
     }
 
     default <A, D> List<D> mapTo(final List<A> actual, final Function<A, D> mapper) {
@@ -102,11 +103,12 @@ public interface MockDsl {
     }
 
     private String given(final String url, final Object body) throws Exception {
-        final var aRequest = MockMvcRequestBuilders.post(url)
+        final var request = MockMvcRequestBuilders.post(url)
+                .with(ApiTest.ADMIN_JWT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(Json.writeValueAsString(body));
 
-        final var actualId = Objects.requireNonNull(this.mvc().perform(aRequest)
+        final var actualId = Objects.requireNonNull(this.mvc().perform(request)
                         .andExpect(MockMvcResultMatchers.status().isCreated())
                         .andReturn()
                         .getResponse().getHeader("Location"))
@@ -116,15 +118,17 @@ public interface MockDsl {
     }
 
     private ResultActions givenResult(final String url, final Object body) throws Exception {
-        final var aRequest = MockMvcRequestBuilders.post(url)
+        final var request = MockMvcRequestBuilders.post(url)
+                .with(ApiTest.ADMIN_JWT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(Json.writeValueAsString(body));
 
-        return this.mvc().perform(aRequest);
+        return this.mvc().perform(request);
     }
 
     private ResultActions list(final String url, final int page, final int perPage, final String search, final String sort, final String direction) throws Exception {
-        final var aRequest = MockMvcRequestBuilders.get(url)
+        final var request = MockMvcRequestBuilders.get(url)
+                .with(ApiTest.ADMIN_JWT)
                 .queryParam("page", String.valueOf(page))
                 .queryParam("perPage", String.valueOf(perPage))
                 .queryParam("search", search)
@@ -133,15 +137,16 @@ public interface MockDsl {
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
-        return this.mvc().perform(aRequest);
+        return this.mvc().perform(request);
     }
 
     private <T> T retrieve(final String url, final Identifier id, final Class<T> clazz) throws Exception {
-        final var aRequest = MockMvcRequestBuilders.get(url + id.getValue())
+        final var request = MockMvcRequestBuilders.get(url + id.getValue())
+                .with(ApiTest.ADMIN_JWT)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
-        final var json = this.mvc().perform(aRequest)
+        final var json = this.mvc().perform(request)
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn()
                 .getResponse().getContentAsString();
@@ -150,26 +155,29 @@ public interface MockDsl {
     }
 
     private ResultActions retrieveResult(final String url, final Identifier id) throws Exception {
-        final var aRequest = MockMvcRequestBuilders.get(url + id.getValue())
+        final var request = MockMvcRequestBuilders.get(url + id.getValue())
+                .with(ApiTest.ADMIN_JWT)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
-        return this.mvc().perform(aRequest);
+        return this.mvc().perform(request);
     }
 
     private ResultActions delete(final String url, final Identifier id) throws Exception {
-        final var aRequest = MockMvcRequestBuilders.delete(url + id.getValue())
+        final var request = MockMvcRequestBuilders.delete(url + id.getValue())
+                .with(ApiTest.ADMIN_JWT)
                 .contentType(MediaType.APPLICATION_JSON);
 
-        return this.mvc().perform(aRequest);
+        return this.mvc().perform(request);
     }
 
     private ResultActions update(final String url, final Identifier id, final Object aRequestBody) throws Exception {
-        final var aRequest = MockMvcRequestBuilders.put(url + id.getValue())
+        final var request = MockMvcRequestBuilders.put(url + id.getValue())
+                .with(ApiTest.ADMIN_JWT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(Json.writeValueAsString(aRequestBody));
 
-        return this.mvc().perform(aRequest);
+        return this.mvc().perform(request);
     }
 
     /**

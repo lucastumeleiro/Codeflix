@@ -1,5 +1,6 @@
 package com.codeflix.admin.catalogo.infrastructure.api;
 
+import com.codeflix.admin.catalogo.ApiTest;
 import com.codeflix.admin.catalogo.domain.Fixture;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.codeflix.admin.catalogo.ControllerTest;
@@ -114,6 +115,7 @@ public class VideoAPITest {
                 .file(expectedBanner)
                 .file(expectedThumb)
                 .file(expectedThumbHalf)
+                .with(ApiTest.VIDEOS_JWT)
                 .param("title", expectedTitle)
                 .param("description", expectedDescription)
                 .param("year_launched", String.valueOf(expectedLaunchYear.getValue()))
@@ -163,6 +165,7 @@ public class VideoAPITest {
                 .thenThrow(NotificationException.with(new Error(expectedErrorMessage)));
 
         final var request = multipart("/videos")
+                .with(ApiTest.VIDEOS_JWT)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.MULTIPART_FORM_DATA);
 
@@ -209,6 +212,7 @@ public class VideoAPITest {
 
 
         final var request = post("/videos")
+                .with(ApiTest.VIDEOS_JWT)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(command));
@@ -244,6 +248,7 @@ public class VideoAPITest {
     @Test
     public void givenEmptyBody_whenCallsCreatePartial_shouldReturnError() throws Exception {
         final var request = post("/videos")
+                .with(ApiTest.VIDEOS_JWT)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
@@ -260,6 +265,7 @@ public class VideoAPITest {
                 .thenThrow(NotificationException.with(new Error(expectedErrorMessage)));
 
         final var request = post("/videos")
+                .with(ApiTest.VIDEOS_JWT)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
@@ -322,6 +328,7 @@ public class VideoAPITest {
                 .thenReturn(VideoOutput.from(video));
 
         final var request = get("/videos/{id}", expectedId)
+                .with(ApiTest.VIDEOS_JWT)
                 .accept(MediaType.APPLICATION_JSON);
 
         final var response = this.mvc.perform(request);
@@ -376,6 +383,7 @@ public class VideoAPITest {
                 .thenThrow(NotFoundException.with(Video.class, expectedId));
 
         final var request = get("/videos/{id}", expectedId)
+                .with(ApiTest.VIDEOS_JWT)
                 .accept(MediaType.APPLICATION_JSON);
 
         final var response = this.mvc.perform(request);
@@ -421,6 +429,7 @@ public class VideoAPITest {
 
 
         final var request = put("/videos/{id}", expectedId.getValue())
+                .with(ApiTest.VIDEOS_JWT)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(command));
@@ -493,6 +502,7 @@ public class VideoAPITest {
 
 
         final var request = put("/videos/{id}", expectedId.getValue())
+                .with(ApiTest.VIDEOS_JWT)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(command));
@@ -514,7 +524,8 @@ public class VideoAPITest {
 
         doNothing().when(deleteVideoUseCase).execute(any());
 
-        final var request = delete("/videos/{id}", expectedId.getValue());
+        final var request = delete("/videos/{id}", expectedId.getValue())
+        .with(ApiTest.VIDEOS_JWT);
 
         final var response = this.mvc.perform(request);
 
@@ -545,6 +556,7 @@ public class VideoAPITest {
                 .thenReturn(new Pagination<>(expectedPage, expectedPerPage, expectedTotal, expectedItems));
 
         final var request = get("/videos")
+                .with(ApiTest.VIDEOS_JWT)
                 .queryParam("page", String.valueOf(expectedPage))
                 .queryParam("perPage", String.valueOf(expectedPerPage))
                 .queryParam("sort", expectedSort)
@@ -602,6 +614,7 @@ public class VideoAPITest {
                 .thenReturn(new Pagination<>(expectedPage, expectedPerPage, expectedTotal, expectedItems));
 
         final var request = get("/videos")
+                .with(ApiTest.VIDEOS_JWT)
                 .accept(MediaType.APPLICATION_JSON);
 
         final var response = this.mvc.perform(request);
@@ -643,7 +656,8 @@ public class VideoAPITest {
 
         when(getMediaUseCase.execute(any())).thenReturn(expectedMedia);
 
-        final var request = get("/videos/{id}/medias/{type}", expectedId.getValue(), expectedMediaType.name());
+        final var request = get("/videos/{id}/medias/{type}", expectedId.getValue(), expectedMediaType.name())
+        .with(ApiTest.VIDEOS_JWT);
 
         final var response = this.mvc.perform(request);
 
@@ -676,6 +690,7 @@ public class VideoAPITest {
 
         final var request = multipart("/videos/{id}/medias/{type}", expectedId.getValue(), expectedType.name())
                 .file(expectedVideo)
+                .with(ApiTest.VIDEOS_JWT)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.MULTIPART_FORM_DATA);
 
@@ -709,6 +724,7 @@ public class VideoAPITest {
 
         final var request = multipart("/videos/{id}/medias/INVALID", expectedId.getValue())
                 .file(expectedVideo)
+                .with(ApiTest.VIDEOS_JWT)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.MULTIPART_FORM_DATA);
 
