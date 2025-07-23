@@ -38,8 +38,7 @@ services:
     ports:
       - 8443:8080
     command:
-      # - start-dev
-      - start-dev --hostname-url=http://keycloak:8080
+      - start-dev --hostname-url=http://localhost:8443
     volumes:
       - ../.docker/keycloak:/opt/keycloak/data/h2:rw
     networks:
