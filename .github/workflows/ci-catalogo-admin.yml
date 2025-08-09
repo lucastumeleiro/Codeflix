@@ -5,7 +5,7 @@ on:
     branches:
       - "develop"
     paths:
-      - "catalogo-admin/**"
+      - "catalogo-admin-java/**"
   workflow_dispatch: # Habilita o gatilho manual através da interface do Github Actions
 
 jobs:
