@@ -1,11 +1,11 @@
-name: CI-CD - Pipeline Catalogo-admin
+name: CI-CD - Pipeline Catalogo-admin-java
 
 on:
   push:
     branches:
       - "main"
     paths:
-      - "catalogo-admin/**"
+      - "catalogo-admin-java/**"
   workflow_dispatch: # Habilita o gatilho manual através da interface do Github Actions
 
 env:
@@ -25,11 +25,11 @@ jobs:
           distribution: "adopt"
 
       - name: Make gradlew executable
-        working-directory: ./catalogo-admin
+        working-directory: ./catalogo-admin-java
         run: chmod +x ./gradlew
 
       - name: Run application tests
-        working-directory: ./catalogo-admin
+        working-directory: ./catalogo-admin-java
         run: ./gradlew test
 
   build:
@@ -49,16 +49,16 @@ jobs:
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
 
       - name: Make gradlew executable
-        run: chmod +x ./catalogo-admin/gradlew
+        run: chmod +x ./catalogo-admin-java/gradlew
 
       - name: Build da aplicação
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
         with:
           arguments: clean build -x test
-          build-root-directory: ./catalogo-admin
+          build-root-directory: ./catalogo-admin-java
 
       - name: Set BUILD_TAG
-        working-directory: ./catalogo-admin
+        working-directory: ./catalogo-admin-java
         run: |
           echo BUILD_TAG=$(echo ${{ github.head_ref || github.ref_name }} | sed "s,/,_,g")-${{ github.run_number }} >> $GITHUB_ENV
 
@@ -77,7 +77,7 @@ jobs:
       - name: Build & push da imagem do docker
         uses: docker/build-push-action@v3
         with:
-          context: ./catalogo-admin
+          context: ./catalogo-admin-java
           push: true
           build-args: VERSION=${{ env.BUILD_TAG }}
           tags: ${{ env.IMAGE_NAME }}:${{ env.BUILD_TAG }}
