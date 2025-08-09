@@ -1,4 +1,4 @@
-name: CI Pipeline Catalogo-admin
+name: CI Pipeline Catalogo-admin-java
 
 on:
   push:
@@ -20,8 +20,8 @@ jobs:
           java-version: "17"
           distribution: "adopt"
       - name: Make gradlew executable
-        working-directory: ./catalogo-admin
+        working-directory: ./catalogo-admin-java
         run: chmod +x ./gradlew
       - name: Run application tests
-        working-directory: ./catalogo-admin
+        working-directory: ./catalogo-admin-java
         run: ./gradlew test
