@@ -1,11 +1,12 @@
-import type {Config} from 'jest';
+import type { Config } from "jest";
 
 const config: Config = {
   clearMocks: true,
   coverageProvider: "v8",
-  rootDir: './src',
+  rootDir: "./src",
+  setupFilesAfterEnv: ["./shared/infra/testing/expect-helpers.ts"],
   transform: {
-    '^.+\\.(t|j)sx?$': '@swc/jest',
+    "^.+\\.(t|j)sx?$": "@swc/jest",
   },
 };
 
