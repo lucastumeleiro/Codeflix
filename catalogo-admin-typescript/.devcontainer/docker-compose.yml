@@ -1,0 +1,6 @@
+services:
+  app:
+    volumes:
+      - .:/home/node/app:cached
+    command: sleep infinity
+ 
